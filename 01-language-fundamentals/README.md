@@ -282,6 +282,28 @@ const { name: firstName } = person;  // firstName = "Alice"
 const { email = "unknown" } = person;  // email = "unknown"
 ```
 
+### Shorthand Properties and Computed Keys
+
+```javascript
+// Shorthand: when variable name matches the key, you can omit the value
+const name = "Alice";
+const age = 30;
+const person = { name, age };  // same as { name: name, age: age }
+
+// Common when returning objects from functions:
+return { ok: true, config };   // instead of { ok: true, config: config }
+
+// Computed property names: use an expression as a key with brackets
+const field = "accuracy";
+const metrics = { [field]: 0.92 };    // { accuracy: 0.92 }
+// Without brackets: { field: 0.92 } — uses the literal string "field"
+
+// Useful when building objects dynamically:
+const grouped = { ...groups, [item.model]: item };
+```
+
+Python dicts don't need computed key syntax because dict keys are always expressions.
+
 ### Optional Chaining and Nullish Coalescing
 
 These have no direct Python equivalent and are used constantly in JS:
@@ -319,6 +341,10 @@ const greet = (name) => {                           // With body
   return `Hello, ${name}!`;
 };
 ```
+
+// Arrow functions returning object literals need wrapping parentheses:
+const toPoint = (x, y) => ({ x, y });
+// Without (): JS parses {} as a function body, not an object literal
 
 **When to use each:**
 - Arrow functions for callbacks, short functions, and most new code
@@ -417,6 +443,7 @@ Key differences:
 - `extends` instead of `class Child(Parent)`
 - No `def` keyword — just `methodName() { }`
 - camelCase method names (JS convention) vs snake_case (Python convention)
+- `static` methods belong to the class, not instances: `static compare(args) { }`, called as `ClassName.compare(args)`
 
 ### Private Fields
 
@@ -479,6 +506,20 @@ Key differences:
 - You `throw new Error(...)`, not `raise ValueError(...)`
 - Standard error types: `Error`, `TypeError`, `RangeError`, `SyntaxError`
 - You can throw anything (not just Error objects), but you shouldn't
+
+### JSON
+
+JavaScript has built-in JSON serialization, equivalent to Python's `json` module:
+
+```javascript
+// Parsing (like json.loads)
+const data = JSON.parse('{"name":"Alice","score":92}');  // → object
+// Throws SyntaxError on invalid input (like json.JSONDecodeError)
+
+// Serializing (like json.dumps)
+JSON.stringify({ name: "Alice", score: 92 });  // → '{"name":"Alice","score":92}'
+JSON.stringify(obj, null, 2);                  // Pretty-printed with 2-space indent
+```
 
 ## Control Flow
 

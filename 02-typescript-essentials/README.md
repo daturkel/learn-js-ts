@@ -136,6 +136,34 @@ def greet(name: str, times: int) -> str:
 add = lambda a, b: a + b  # Can't annotate lambdas in Python
 ```
 
+### Optional Function Parameters
+
+Add `?` after a parameter name to make it optional. Its type becomes `T | undefined` inside the function body:
+
+```typescript
+function repeat(text: string, times?: number): string {
+  return text.repeat(times ?? 1);  // times may be undefined, fall back to 1
+}
+
+repeat("hi", 3);  // "hihihi"
+repeat("hi");     // "hi"
+```
+
+In Python, optional parameters require a default value in the signature. In TypeScript, `?` marks the parameter as optional without a default — you handle `undefined` in the body.
+
+### The `??` Operator (Nullish Coalescing)
+
+`??` returns the right-hand side when the left is `null` or `undefined`. Unlike Python's `or`, it does **not** trigger on other falsy values:
+
+```typescript
+null ?? "default"       // "default"
+undefined ?? "default"  // "default"
+0 ?? "default"          // 0  — 0 is not null/undefined
+"" ?? "default"         // "" — "" is not null/undefined
+```
+
+Python's `or` triggers on any falsy value (`0 or "default"` gives `"default"`), which is often a bug when the value is legitimately `0` or empty string. Use `??` when you want a fallback only for missing values.
+
 ### Type Inference
 
 TypeScript infers types more aggressively than mypy. You often don't need to annotate variables:
@@ -400,6 +428,19 @@ class ApiResponse(Generic[T]):
     status: int
     message: str
 ```
+
+### Default Type Parameters
+
+A type parameter can have a default, used when the caller doesn't provide one:
+
+```typescript
+type Result<T, E = Error> = { ok: true; value: T } | { ok: false; error: E };
+
+type StringResult = Result<string>;           // Result<string, Error>
+type CustomResult = Result<string, string>;   // Result<string, string>
+```
+
+Similar to Python default argument values, but for type parameters.
 
 ### Constraints
 
@@ -777,6 +818,65 @@ const input2 = <HTMLInputElement>document.getElementById("search");
 ```
 
 Use assertions sparingly. They're a way of telling the compiler "trust me" -- and you might be wrong.
+
+---
+
+## Common Array and Object Methods
+
+The exercises use several standard JavaScript methods that are worth knowing before diving in.
+
+### Array Methods
+
+```typescript
+const nums = [1, 2, 3, 4, 5];
+
+nums.map(n => n * 2);            // [2, 4, 6, 8, 10] — transform each element
+nums.filter(n => n > 2);         // [3, 4, 5] — keep matching elements
+nums.find(n => n > 3);           // 4 — first matching element
+nums.reduce((acc, n) => acc + n, 0);  // 15 — fold into a single value
+```
+
+`reduce` in detail — it's the one that trips people up:
+
+```typescript
+// reduce((accumulator, current) => nextAccumulator, initialValue)
+[1, 2, 3].reduce((acc, n) => acc + n, 0);
+// acc=0, n=1 → 1
+// acc=1, n=2 → 3
+// acc=3, n=3 → 6 ✓
+```
+
+Python equivalent: `functools.reduce(lambda acc, n: acc + n, [1, 2, 3], 0)`.
+
+### Object Methods
+
+```typescript
+const obj = { a: 1, b: 2, c: 3 };
+
+Object.keys(obj);     // ["a", "b", "c"]    — like dict.keys()
+Object.values(obj);   // [1, 2, 3]          — like dict.values()
+Object.entries(obj);  // [["a",1],["b",2],["c",3]] — like dict.items()
+
+// Build an object from [key, value] pairs — inverse of entries
+Object.fromEntries([["a", 1], ["b", 2]]);  // { a: 1, b: 2 }
+// Like: dict([("a", 1), ("b", 2)]) in Python
+```
+
+### Iteration
+
+```typescript
+// for...of — iterate over array elements (like Python's "for x in list")
+for (const item of ["a", "b", "c"]) {
+  console.log(item);
+}
+
+// for...of with Object.entries() — like Python's "for k, v in d.items()"
+for (const [key, value] of Object.entries(obj)) {
+  console.log(key, value);
+}
+```
+
+Avoid `for...in` for arrays — it iterates over index strings, not elements. Use `for...of` for arrays and `for...of Object.entries()` for objects.
 
 ---
 

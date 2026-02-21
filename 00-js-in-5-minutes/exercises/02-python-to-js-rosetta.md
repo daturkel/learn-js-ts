@@ -45,7 +45,7 @@ Short text
 <summary>Hint</summary>
 
 - f-strings become template literals: `` `${variable}` ``
-- Zero-padding: JS has `String.prototype.padStart(width, char)`
+- Zero-padding: convert the number to a string first with `String(n)`, then call `.padStart(width, char)` — e.g. `String(7).padStart(3, "0")` gives `"007"`
 - `len(s)` becomes `s.length`
 - `s.strip()` becomes `s.trim()`
 - `s[:n]` becomes `s.slice(0, n)`
@@ -126,6 +126,7 @@ Average: 83.4
 - Dict comprehension becomes `Object.fromEntries()` with `.map()`
 - `sum()` becomes `.reduce()`
 - Ternary: `"pass" if x else "fail"` becomes `x ? "pass" : "fail"`
+- `f"{avg:.1f}"` becomes `` `${avg.toFixed(1)}` `` — `toFixed(n)` rounds to n decimal places and returns a string
 </details>
 
 <details>
@@ -218,7 +219,7 @@ Keys: ['batch_size', 'epochs', 'learning_rate', 'optimizer']
 - `"key" in dict` works the same: `"key" in obj`
 - `dict.get(key, default)` becomes `obj[key] ?? default` (nullish coalescing)
 - `dict.items()` becomes `Object.entries(obj)`
-- `sorted()` becomes `[...arr].sort()`
+- `sorted()` becomes `[...arr].sort()`. For sorting an array of `[key, value]` pairs by key, use a comparator: `.sort((a, b) => a[0].localeCompare(b[0]))`. `localeCompare` is the standard way to compare strings in a sort function.
 - Python booleans are `True`/`False`; JS uses `true`/`false`
 </details>
 

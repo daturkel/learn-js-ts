@@ -474,6 +474,8 @@ class Counter:
 ```
 
 The differences: `constructor` instead of `__init__`, no `self` parameter (use `this` instead), `toString()` instead of `__str__`, and methods don't use the `function` keyword. Inheritance uses `extends` and `super()` just like Python.
+
+`this.count++` is the increment operator — shorthand for `this.count += 1`. JS also has `--` for decrement. Python has no equivalent.
 </details>
 
 ### 15. Conditionals

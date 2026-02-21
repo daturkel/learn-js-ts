@@ -97,6 +97,12 @@ array.reduce((groups, item) => {
   return groups;
 }, {})
 ```
+
+To use a variable as an object key, use bracket notation in the object literal:
+```javascript
+const key = item.model;
+{ [key]: value }   // uses the VALUE of key, not the literal string "key"
+```
 </details>
 
 <details>

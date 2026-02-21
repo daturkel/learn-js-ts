@@ -30,6 +30,8 @@ An experiment groups multiple runs:
 
 Create an experiment with a few runs and call each method:
 
+Note: `3e-5` is scientific notation for `0.00003` — same syntax as Python.
+
 ```javascript
 const exp = new Experiment("bert-finetune", "bert-base", {
   learningRate: 3e-5,
@@ -170,7 +172,17 @@ Key differences:
 
 ## Stretch Goal
 
-Add a `static` method `Experiment.compare(experiments)` that takes an array of experiments and returns them ranked by best accuracy:
+Add a `static` method `Experiment.compare(experiments)` that takes an array of experiments and returns them ranked by best accuracy.
+
+A `static` method belongs to the class itself, not to instances. Declare it with the `static` keyword and call it as `Experiment.compare(...)`:
+
+```javascript
+class Experiment {
+  static compare(experiments) {
+    // called as Experiment.compare(arr), not exp.compare(arr)
+  }
+}
+```
 
 <details>
 <summary>Solution</summary>
