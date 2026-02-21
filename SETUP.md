@@ -29,7 +29,20 @@ npm --version    # Should print 10.x.x
 - `npm` — the package manager (like `pip`)
 - `npx` — runs packages without installing them globally (like `pipx run`)
 
-## 2. Editor Setup
+## 2. Install TypeScript
+
+TypeScript is used from Module 02 onward. Install it globally so `tsc` is available everywhere:
+
+```bash
+npm install -g typescript
+
+# Verify
+tsc --version   # Should print Version 5.x.x
+```
+
+Alternatively, you can install it per-project with `npm install typescript` and run it via `npx tsc`. Either way works — just make sure `typescript` is installed before running `tsc`, because there's an unrelated package called `tsc` on npm that `npx` will grab otherwise.
+
+## 3. Editor Setup
 
 **VS Code** is strongly recommended for TypeScript development. The TypeScript integration is excellent out of the box.
 
@@ -40,7 +53,7 @@ If you use VS Code, no additional extensions are strictly required — TypeScrip
 
 If you use another editor (Cursor, Zed, Neovim), ensure it has TypeScript language server support.
 
-## 3. Verify Your Setup
+## 4. Verify Your Setup
 
 Create a test file and run it:
 
@@ -57,7 +70,7 @@ rm test.js
 
 You should see `Hello from Node.js!` printed.
 
-## 4. API Keys (needed from Module 10 onward)
+## 5. API Keys (needed from Module 10 onward)
 
 Modules 10-11 use AI provider APIs. You'll need at least one of:
 
@@ -73,7 +86,7 @@ export OPENAI_API_KEY="sk-..."
 
 Or add them to a `.env` file (you'll learn how in Module 05).
 
-## 5. Optional: Install Bun (for Module 12)
+## 6. Optional: Install Bun (for Module 12)
 
 Bun is an alternative JavaScript runtime that's faster and has built-in TypeScript support. You'll explore it in Module 12, but you can install it now if you want:
 

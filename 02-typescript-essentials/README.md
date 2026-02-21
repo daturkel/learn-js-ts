@@ -106,6 +106,25 @@ const add = (a: number, b: number): number => a + b;
 function logMessage(msg: string): void {
   console.log(msg);
 }
+
+// Inline object type — useful for one-off shapes without defining an interface
+function formatUser(user: { name: string; email: string }): string {
+  return `${user.name} (${user.email})`;
+}
+
+// Callback parameter — use (paramType) => returnType syntax
+function processItems(items: string[], callback: (item: string) => string): string[] {
+  return items.map(callback);
+}
+```
+
+Python equivalent for the callback:
+
+```python
+from collections.abc import Callable
+
+def process_items(items: list[str], callback: Callable[[str], str]) -> list[str]:
+    return [callback(item) for item in items]
 ```
 
 ```python
@@ -403,10 +422,14 @@ longest(10, 20);               // Error: numbers don't have .length
 Python equivalent using `Protocol`:
 
 ```python
+from typing import Protocol, TypeVar
+
 class HasLength(Protocol):
     def __len__(self) -> int: ...
 
-def longest(a: T, b: T) -> T:  # where T is bound to HasLength
+T = TypeVar("T", bound=HasLength)
+
+def longest(a: T, b: T) -> T:
     return a if len(a) >= len(b) else b
 ```
 
@@ -578,11 +601,13 @@ const DIRECTIONS = {
   Right: "RIGHT",
 } as const;
 
-// Type: "UP" | "DOWN" | "LEFT" | "RIGHT"
+// typeof DIRECTIONS is the type of the object: { readonly Up: "UP", readonly Down: "DOWN", ... }
+// keyof typeof DIRECTIONS is the union of its keys: "Up" | "Down" | "Left" | "Right"
+// Indexing with those keys gives the union of values: "UP" | "DOWN" | "LEFT" | "RIGHT"
 type Direction = (typeof DIRECTIONS)[keyof typeof DIRECTIONS];
 ```
 
-`as const` makes the object deeply readonly and narrows string values to literal types. It avoids some quirks of enums (like numeric enums being assignable to `number`) and produces simpler JavaScript output.
+`as const` makes the object deeply readonly and narrows string values to literal types (without it, `DIRECTIONS.Up` would just be `string`, not `"UP"`). Many TS developers prefer this over enums because it avoids some quirks (like numeric enums being assignable to `number`) and produces simpler JavaScript output.
 
 ---
 

@@ -6,13 +6,17 @@ Add full TypeScript type annotations to 10 untyped JavaScript functions. This ex
 
 ## Setup
 
+Make sure you've installed TypeScript (see [Setup](/SETUP.md)).
+
 Create a file called `type-annotations.ts` and copy the untyped functions below into it. Add type annotations to every parameter, return type, and any variables where the type isn't obvious.
 
 Then run:
 
 ```bash
-npx tsc --strict --noEmit type-annotations.ts
+npx tsc --strict --noEmit --target es2015 type-annotations.ts
 ```
+
+The `--target es2015` flag is needed because TypeScript defaults to ES5, which predates methods like `String.repeat()`. In a real project this is set in `tsconfig.json` instead.
 
 Fix any errors until it compiles cleanly.
 
@@ -44,6 +48,7 @@ function repeat(text, times) {
 }
 
 // 5. Union type parameter
+// value can be a string, number, or boolean
 function stringify(value) {
   if (typeof value === "string") {
     return value;
@@ -118,10 +123,10 @@ function doubleAll(numbers: number[]): number[] { ... }
 
 - Function 3 needs an inline object type or a defined interface for the user parameter.
 - Function 4: use `?` to mark the optional parameter. Check what `times ?? 1` implies about the type.
-- Function 6: the callback takes a single item and returns something. Think about how to type a generic callback -- or just use `string` for the specific case.
+- Function 6: the callback takes a single item and returns something. You can use `string` for a concrete solution, or make it generic with `<T, U>`.
 - Function 8 needs an interface for the student objects.
 - Function 9 returns either `number` or `null` -- that's a union type.
-- Function 10: the transform callback takes both the item and the index.
+- Function 10: the transform callback takes both the item and its index. This one is naturally generic — try using `<T, U>` so it works with any item type.
 
 </details>
 
@@ -199,21 +204,6 @@ function safeDivide(a: number, b: number): number | null {
 }
 
 // 10. Complex callback with index
-function transformWithIndex(
-  items: string[],
-  transform: (item: string, index: number) => string
-): string[] {
-  return items.map((item, index) => transform(item, index));
-}
-```
-
-**Note:** Functions 6 and 10 use `string` for concreteness. In real code, you'd likely make them generic:
-
-```typescript
-function processItems<T, U>(items: T[], callback: (item: T) => U): U[] {
-  return items.map(callback);
-}
-
 function transformWithIndex<T, U>(
   items: T[],
   transform: (item: T, index: number) => U
@@ -222,7 +212,13 @@ function transformWithIndex<T, U>(
 }
 ```
 
-Generics are covered in exercise 03.
+**Note:** Function 6 uses `string` for concreteness. In real code, you'd make it generic too:
+
+```typescript
+function processItems<T, U>(items: T[], callback: (item: T) => U): U[] {
+  return items.map(callback);
+}
+```
 
 </details>
 
@@ -233,7 +229,7 @@ Generics are covered in exercise 03.
 After adding types, run:
 
 ```bash
-npx tsc --strict --noEmit type-annotations.ts
+npx tsc --strict --noEmit --target es2015 type-annotations.ts
 ```
 
 If there are no errors, you're done. Try calling each function with wrong argument types to see the compiler catch mistakes:
