@@ -8,15 +8,12 @@ Practice defining interfaces, type aliases, union types, and optional properties
 
 ## Setup
 
-Create a new file called `experiment-types.ts`. You'll run it with `npx tsx experiment-types.ts`.
+Make sure you've installed TypeScript and tsx (see [Setup](/SETUP.md)).
 
-If you haven't set up a project yet, do a quick setup:
+Create a new file called `experiment-types.ts`.
 
-```bash
-mkdir -p exercise && cd exercise
-npm init -y
-npm install -D typescript tsx
-```
+- To **type-check** without running: `tsc --strict --noEmit --target es2015 experiment-types.ts`
+- To **run** the file and see output: `tsx experiment-types.ts`
 
 ## Requirements
 

@@ -29,18 +29,22 @@ npm --version    # Should print 10.x.x
 - `npm` — the package manager (like `pip`)
 - `npx` — runs packages without installing them globally (like `pipx run`)
 
-## 2. Install TypeScript
+## 2. Install TypeScript and tsx
 
-TypeScript is used from Module 02 onward. Install it globally so `tsc` is available everywhere:
+TypeScript is used from Module 02 onward. Install both globally:
 
 ```bash
-npm install -g typescript
+npm install -g typescript tsx
 
 # Verify
 tsc --version   # Should print Version 5.x.x
+tsx --version   # Should print a version number
 ```
 
-Alternatively, you can install it per-project with `npm install typescript` and run it via `npx tsc`. Either way works — just make sure `typescript` is installed before running `tsc`, because there's an unrelated package called `tsc` on npm that `npx` will grab otherwise.
+- **`tsc`** — the TypeScript compiler. Use `tsc --noEmit` to type-check without producing output files.
+- **`tsx`** — runs TypeScript files directly, like `python` runs `.py` files. Use this to execute `.ts` files.
+
+Alternatively, you can install both per-project with `npm install -D typescript tsx` and run them via `npx tsc` / `npx tsx`. Either way works — just make sure `typescript` is installed before running `tsc`, because there's an unrelated package called `tsc` on npm that `npx` will grab otherwise.
 
 ## 3. Editor Setup
 
