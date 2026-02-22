@@ -8,23 +8,9 @@ Build a concurrency-limited parallel fetcher — like a semaphore. This is a com
 
 ## Background
 
-**Python equivalent:**
+Firing off a hundred requests at once with `Promise.all` is fast, but it can overwhelm a server, hit rate limits, or exhaust local memory with pending responses. The solution is a **concurrency pool**: keep at most N operations running at any moment, and as soon as one finishes, start the next.
 
-```python
-import asyncio
-
-async def fetch_limited(urls: list[str], max_concurrent: int = 5):
-    semaphore = asyncio.Semaphore(max_concurrent)
-
-    async def fetch_one(url: str):
-        async with semaphore:
-            async with httpx.AsyncClient() as client:
-                return await client.get(url)
-
-    return await asyncio.gather(*[fetch_one(url) for url in urls])
-```
-
-JavaScript has no built-in `Semaphore`. You'll build one.
+JavaScript has no built-in primitive for this. You'll build one from `Promise.race` — which resolves as soon as *any* Promise in a set settles, effectively freeing a slot in the pool.
 
 ## Setup
 
@@ -37,8 +23,6 @@ Create `parallel.ts`. We'll use JSONPlaceholder endpoints as our test URLs.
 `Array.from({ length: n }, (_, i) => expr)` — JS's equivalent of Python's `range()`. Creates an array of `n` elements using a mapping function. The first argument `_` is the unused element value; `i` is the 0-based index.
 
 ```typescript
-// Python: [f"posts/{i+1}" for i in range(10)]
-// JS:
 Array.from({ length: 10 }, (_, i) => `posts/${i + 1}`)
 // => ["posts/1", "posts/2", ..., "posts/10"]
 ```
@@ -239,5 +223,5 @@ The key is `Promise.race(executing)`. It resolves as soon as ANY promise in the 
 - As soon as one finishes, the next starts immediately
 - Order of results is preserved (using the `index`)
 
-This is exactly what `asyncio.Semaphore` does in Python, but built from lower-level primitives.
+This pattern — a fixed-size pool that refills as work completes — is a fundamental async concurrency primitive, and here you've built it from scratch using only `Promise.race`.
 </details>
