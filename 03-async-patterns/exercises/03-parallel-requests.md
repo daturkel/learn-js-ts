@@ -30,6 +30,19 @@ JavaScript has no built-in `Semaphore`. You'll build one.
 
 Create `parallel.ts`. We'll use JSONPlaceholder endpoints as our test URLs.
 
+**Two utilities you'll use throughout this exercise:**
+
+`performance.now()` — returns a high-resolution timestamp in milliseconds. Take two readings and subtract to measure elapsed time. It's a browser/Node.js global; no import needed.
+
+`Array.from({ length: n }, (_, i) => expr)` — JS's equivalent of Python's `range()`. Creates an array of `n` elements using a mapping function. The first argument `_` is the unused element value; `i` is the 0-based index.
+
+```typescript
+// Python: [f"posts/{i+1}" for i in range(10)]
+// JS:
+Array.from({ length: 10 }, (_, i) => `posts/${i + 1}`)
+// => ["posts/1", "posts/2", ..., "posts/10"]
+```
+
 ## Tasks
 
 ### Task 1: Sequential baseline

@@ -275,6 +275,9 @@ const decoder = new TextDecoder();
 while (true) {
   const { done, value } = await reader.read();
   if (done) break;
+  // `{ stream: true }` tells the decoder more data is coming.
+  // Without it, multi-byte UTF-8 characters split across chunk boundaries
+  // would be decoded incorrectly. Always pass this option inside a loop.
   const text = decoder.decode(value, { stream: true });
   process.stdout.write(text);  // Print without newline
 }
@@ -309,6 +312,31 @@ async for num in generate_numbers():
 ```
 
 Nearly identical syntax. You'll use `for await` heavily when streaming AI model responses.
+
+### Server-Sent Events (SSE)
+
+AI APIs (Anthropic, OpenAI, etc.) stream responses using **Server-Sent Events** — a simple text format where each event is a `data:` line followed by a blank line:
+
+```
+data: {"type":"content","token":"Hello"}
+
+data: {"type":"content","token":" world"}
+
+data: [DONE]
+```
+
+The SDK handles SSE parsing for you, but understanding the format helps when debugging or building custom integrations. Parsing it is straightforward:
+
+```typescript
+function parseSSELine(line: string): unknown | null {
+  if (!line.startsWith("data: ")) return null;  // Skip non-data lines
+  const payload = line.slice(6);                 // Remove "data: " prefix
+  if (payload === "[DONE]") return null;         // Sentinel value — stream is finished
+  return JSON.parse(payload);
+}
+```
+
+**Python comparison:** Python's `httpx` exposes SSE similarly — you iterate lines and check for `data:` prefixes. The format is identical; only the parsing code differs.
 
 ## Timers
 

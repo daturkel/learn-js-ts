@@ -82,7 +82,7 @@ Then create a simulated stream and process it:
 async function* simulateStream(): AsyncGenerator<string> {
   const tokens = ["Hello", " from", " a", " simulated", " AI", " stream", "!"];
   for (const token of tokens) {
-    await new Promise(r => setTimeout(r, 100));  // Simulate network delay
+    await new Promise(resolve => setTimeout(resolve, 100));  // Simulate network delay
     yield `data: ${JSON.stringify({ token })}\n\n`;
   }
   yield "data: [DONE]\n\n";
