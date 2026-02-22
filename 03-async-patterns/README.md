@@ -15,7 +15,7 @@ Unlike languages where you can reach for threads or separate processes to run wo
 
 ```
 ┌─────────────────────────┐
-│       Call Stack         │  ← Executes one function at a time
+│       Call Stack        │  ← Executes one function at a time
 └──────────┬──────────────┘
            │ (when stack is empty)
            ▼
@@ -25,7 +25,7 @@ Unlike languages where you can reach for threads or separate processes to run wo
            │ (when microtasks are done)
            ▼
 ┌─────────────────────────┐
-│      Task Queue         │  ← setTimeout callbacks, I/O callbacks
+│       Task Queue        │  ← setTimeout callbacks, I/O callbacks
 └─────────────────────────┘
 ```
 
