@@ -79,11 +79,16 @@ A Promise is an object that represents a value that will be available in the fut
 
 ```typescript
 // Creating a Promise
+// `resolve` and `reject` are parameter names, not keywords.
+// The Promise constructor calls your function and passes two callbacks:
+//   resolve(value) — fulfills the promise with a value
+//   reject(reason) — rejects the promise with an error
+// You can name them anything, but `resolve`/`reject` is the convention.
 const promise = new Promise<string>((resolve, reject) => {
   // Simulate async work
   setTimeout(() => {
-    resolve("done!");       // Success — pass the result
-    // reject(new Error("failed"));  // Or failure
+    resolve("done!");       // Calls the resolve callback — fulfills the promise
+    // reject(new Error("failed"));  // Calls the reject callback — rejects it
   }, 1000);
 });
 
@@ -281,7 +286,7 @@ while (true) {
 // for await...of — like Python's async for
 async function* generateNumbers(): AsyncGenerator<number> {
   for (let i = 0; i < 5; i++) {
-    await new Promise(r => setTimeout(r, 100));
+    await new Promise(resolve => setTimeout(resolve, 100));
     yield i;
   }
 }
@@ -316,7 +321,10 @@ const intervalId = setInterval(() => console.log("tick"), 1000);
 clearInterval(intervalId);  // Stop it
 
 // Awaitable sleep (Python's asyncio.sleep equivalent)
-const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+// `resolve` is the fulfillment callback the Promise passes to your executor.
+// Giving it directly to `setTimeout` means: "call resolve() after ms milliseconds."
+// When resolve() is called with no argument, the promise fulfills with `undefined`.
+const sleep = (ms: number) => new Promise<void>(resolve => setTimeout(resolve, ms));
 await sleep(1000);  // Wait 1 second
 ```
 
