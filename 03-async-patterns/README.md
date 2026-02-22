@@ -9,13 +9,13 @@ The single most important conceptual module. JavaScript's async model is the big
 
 JavaScript is single-threaded. There are no threads, no multiprocessing, no GIL. All concurrency happens through the **event loop** — a single thread that processes tasks from a queue.
 
-**Python comparison:** The closest Python equivalent is `asyncio` — single-threaded, cooperative concurrency. But in Python, asyncio is opt-in (you can still use threads, multiprocessing). In JavaScript, the event loop is the *only* execution model.
+Unlike languages where you can reach for threads or separate processes to run work simultaneously, the event loop is JavaScript's only execution model. Concurrency here means interleaving tasks on one thread — not running them in parallel. An `await` expression doesn't block the thread; it suspends the current async function and lets other queued tasks run until the awaited value is ready.
 
 ### How it works
 
 ```
 ┌─────────────────────────┐
-│       Call Stack         │  ← Executes one function at a time
+│       Call Stack        │  ← Executes one function at a time
 └──────────┬──────────────┘
            │ (when stack is empty)
            ▼
@@ -25,7 +25,7 @@ JavaScript is single-threaded. There are no threads, no multiprocessing, no GIL.
            │ (when microtasks are done)
            ▼
 ┌─────────────────────────┐
-│      Task Queue         │  ← setTimeout callbacks, I/O callbacks
+│       Task Queue        │  ← setTimeout callbacks, I/O callbacks
 └─────────────────────────┘
 ```
 
@@ -79,11 +79,16 @@ A Promise is an object that represents a value that will be available in the fut
 
 ```typescript
 // Creating a Promise
+// `resolve` and `reject` are parameter names, not keywords.
+// The Promise constructor calls your function and passes two callbacks:
+//   resolve(value) — fulfills the promise with a value
+//   reject(reason) — rejects the promise with an error
+// You can name them anything, but `resolve`/`reject` is the convention.
 const promise = new Promise<string>((resolve, reject) => {
   // Simulate async work
   setTimeout(() => {
-    resolve("done!");       // Success — pass the result
-    // reject(new Error("failed"));  // Or failure
+    resolve("done!");       // Calls the resolve callback — fulfills the promise
+    // reject(new Error("failed"));  // Calls the reject callback — rejects it
   }, 1000);
 });
 
@@ -110,18 +115,9 @@ fetch("https://api.example.com/data")
 
 ## async/await
 
-Syntactic sugar over Promises. If you've used Python's `async/await`, this will look very familiar:
-
-```python
-# Python
-async def fetch_user(user_id: int) -> dict:
-    response = await httpx.get(f"https://api.example.com/users/{user_id}")
-    response.raise_for_status()
-    return response.json()
-```
+`async/await` is syntactic sugar over Promises that lets you write async code as if it were synchronous. Marking a function `async` makes it implicitly return a Promise. Inside that function, `await` suspends execution until the awaited Promise settles, then resumes with the resolved value — without blocking the event loop. Everything else queued up on the event loop continues running while you wait.
 
 ```typescript
-// TypeScript — nearly identical syntax
 async function fetchUser(userId: number): Promise<Record<string, unknown>> {
   const response = await fetch(`https://api.example.com/users/${userId}`);
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -129,7 +125,7 @@ async function fetchUser(userId: number): Promise<Record<string, unknown>> {
 }
 ```
 
-Key differences from Python:
+If you've used Python's `async/await`, the syntax is nearly identical. A few differences worth knowing:
 
 | | Python | JavaScript |
 |---|--------|-----------|
@@ -169,21 +165,11 @@ if (!response.ok) {
 
 ## Parallel Execution
 
-### Promise.all — like asyncio.gather
+### Promise.all
 
-Run multiple async operations concurrently:
-
-```python
-# Python
-results = await asyncio.gather(
-    fetch_user(1),
-    fetch_user(2),
-    fetch_user(3),
-)
-```
+Pass an array of Promises to `Promise.all` and it waits for all of them to resolve, returning an array of results in the same order. All the operations start concurrently — they're not run one at a time.
 
 ```typescript
-// TypeScript
 const results = await Promise.all([
   fetchUser(1),
   fetchUser(2),
@@ -192,9 +178,11 @@ const results = await Promise.all([
 // results is [user1, user2, user3]
 ```
 
-**Fails fast:** If any promise rejects, `Promise.all` rejects immediately (same as `asyncio.gather`).
+**Fails fast:** If any Promise rejects, `Promise.all` rejects immediately and the other results are discarded.
 
-### Promise.allSettled — handle mixed results
+### Promise.allSettled
+
+Use `Promise.allSettled` when you want results from all operations regardless of whether some fail. It waits for every Promise to settle, then gives you an array where each entry is either `{ status: "fulfilled", value }` or `{ status: "rejected", reason }`.
 
 ```typescript
 const results = await Promise.allSettled([
@@ -212,9 +200,11 @@ for (const result of results) {
 }
 ```
 
-No direct Python equivalent — `asyncio.gather(return_exceptions=True)` is the closest.
+Unlike `Promise.all`, `Promise.allSettled` never rejects. It always resolves once every input Promise has settled.
 
 ### Promise.race and Promise.any
+
+Sometimes you want whichever result arrives first. `Promise.race` resolves (or rejects) as soon as any input Promise settles. `Promise.any` is similar but only resolves on the first *success* — it keeps waiting through rejections until either a success arrives or everything has failed.
 
 ```typescript
 // First to complete (success or failure) wins
@@ -226,7 +216,7 @@ const firstSuccess = await Promise.any([fetchFromServer1(), fetchFromServer2()])
 
 ### Concurrency Limiting
 
-Unlike Go's goroutines (unlimited) or Python's `asyncio.Semaphore`, JavaScript has no built-in concurrency limiter. You build one:
+JavaScript has no built-in concurrency limiter. When you're fetching a large batch of URLs or processing many items, unconstrained parallelism can overwhelm a server or run into rate limits. The pattern is to keep a pool of at most N running Promises, and start the next one as soon as a slot opens:
 
 ```typescript
 async function pMap<T, R>(
@@ -259,7 +249,9 @@ const results = await pMap(urls, url => fetch(url), 5);
 
 ## Streams
 
-Streams represent data that arrives in chunks over time. This is critical for AI work — LLM responses are streamed token by token.
+Streams represent data that arrives incrementally rather than all at once. Instead of waiting for an entire response body to download before doing anything with it, you process each chunk the moment it arrives. For large payloads this reduces time-to-first-byte dramatically. For AI model responses it's essential: generation can take several seconds, and streaming lets you display each token as soon as the model produces it rather than waiting for the entire reply.
+
+The raw HTTP streaming API gives you a `ReadableStream` on `response.body`. You get a `reader` from it, call `reader.read()` in a loop to pull chunks, and use a `TextDecoder` to convert the binary chunks to strings:
 
 ```typescript
 // Reading a stream with async iteration
@@ -270,6 +262,9 @@ const decoder = new TextDecoder();
 while (true) {
   const { done, value } = await reader.read();
   if (done) break;
+  // `{ stream: true }` tells the decoder more data is coming.
+  // Without it, multi-byte UTF-8 characters split across chunk boundaries
+  // would be decoded incorrectly. Always pass this option inside a loop.
   const text = decoder.decode(value, { stream: true });
   process.stdout.write(text);  // Print without newline
 }
@@ -277,11 +272,12 @@ while (true) {
 
 ### Async Iterables
 
+An **async generator** is a function declared `async function*` that `yield`s values asynchronously. Calling it returns an `AsyncGenerator` object, which you consume with `for await...of`. At each iteration the loop pauses until the next `yield` resolves, then continues — giving you a clean way to process a sequence of async values without manually managing a reader loop.
+
 ```typescript
-// for await...of — like Python's async for
 async function* generateNumbers(): AsyncGenerator<number> {
   for (let i = 0; i < 5; i++) {
-    await new Promise(r => setTimeout(r, 100));
+    await new Promise(resolve => setTimeout(resolve, 100));
     yield i;
   }
 }
@@ -291,41 +287,60 @@ for await (const num of generateNumbers()) {
 }
 ```
 
-**Python comparison:**
+`for await...of` works with any object that implements the async iterable protocol — including Node.js streams and the SDK streaming responses you'll see in later modules. Python has identical `async for` / `async def ... yield` syntax with the same semantics.
 
-```python
-async def generate_numbers():
-    for i in range(5):
-        await asyncio.sleep(0.1)
-        yield i
+### Server-Sent Events (SSE)
 
-async for num in generate_numbers():
-    print(num)
+AI APIs (Anthropic, OpenAI, etc.) stream responses using **Server-Sent Events** — a simple text format where each event is a `data:` line followed by a blank line:
+
+```
+data: {"type":"content","token":"Hello"}
+
+data: {"type":"content","token":" world"}
+
+data: [DONE]
 ```
 
-Nearly identical syntax. You'll use `for await` heavily when streaming AI model responses.
+The SDK handles SSE parsing for you, but understanding the format helps when debugging or building custom integrations. Parsing it is straightforward:
+
+```typescript
+function parseSSELine(line: string): unknown | null {
+  if (!line.startsWith("data: ")) return null;  // Skip non-data lines
+  const payload = line.slice(6);                 // Remove "data: " prefix
+  if (payload === "[DONE]") return null;         // Sentinel value — stream is finished
+  return JSON.parse(payload);
+}
+```
+
+The wire format is standardized — any HTTP client in any language sees the same `data:` lines. What differs is only how you parse them.
 
 ## Timers
 
+Timer functions are globals in both the browser and Node.js — no import needed. `setTimeout` schedules a callback once after a delay; `setInterval` schedules it repeatedly. Neither is awaitable on its own, but wrapping `setTimeout` in a Promise gives you an async-friendly `sleep`:
+
 ```typescript
-// Run after delay (like asyncio.call_later)
+// Run after delay
 setTimeout(() => console.log("delayed"), 1000);
 
-// Run repeatedly (no direct Python equivalent)
+// Run repeatedly
 const intervalId = setInterval(() => console.log("tick"), 1000);
 clearInterval(intervalId);  // Stop it
 
-// Awaitable sleep (Python's asyncio.sleep equivalent)
-const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+// Awaitable sleep:
+// `resolve` is the fulfillment callback the Promise passes to your executor.
+// Giving it directly to `setTimeout` means: "call resolve() after ms milliseconds."
+// When resolve() is called with no argument, the promise fulfills with `undefined`.
+const sleep = (ms: number) => new Promise<void>(resolve => setTimeout(resolve, ms));
 await sleep(1000);  // Wait 1 second
 ```
 
-There is no synchronous `time.sleep()` in JavaScript. Blocking the event loop freezes everything.
+There is no synchronous sleep in JavaScript. A blocking loop would freeze the event loop and prevent all other async work from running.
 
 ## AbortController — Cancellation
 
+When you start an async operation and later need to cancel it — because a user navigated away, a timeout expired, or a newer request supersedes it — you use an `AbortController`. You create a controller, pass its `.signal` to the operation, and call `.abort()` to cancel. Any operation holding that signal will reject with an `AbortError`.
+
 ```typescript
-// Cancel an in-flight request (like Python's asyncio.Task.cancel())
 const controller = new AbortController();
 
 // Start a fetch with a signal

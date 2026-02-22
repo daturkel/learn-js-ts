@@ -8,18 +8,9 @@ Practice reading streaming responses — the exact pattern used to stream AI mod
 
 ## Background
 
-In Python, streaming looks like:
+An HTTP response body is a `ReadableStream`. Rather than waiting for the entire body to arrive before doing anything with it, you can read it chunk by chunk. This matters when responses are large, slow to generate, or both — which is exactly the situation with AI model outputs.
 
-```python
-import httpx
-
-async with httpx.AsyncClient() as client:
-    async with client.stream("GET", url) as response:
-        async for chunk in response.aiter_text():
-            print(chunk, end="", flush=True)
-```
-
-In JavaScript, you use the `ReadableStream` API or async iteration.
+The low-level path is to call `response.body.getReader()` and loop on `reader.read()`. A higher-level option is to wrap that reader in an async generator and consume it with `for await...of`, which gives you cleaner code for anything that processes the stream line by line (like SSE).
 
 ## Setup
 
@@ -82,7 +73,7 @@ Then create a simulated stream and process it:
 async function* simulateStream(): AsyncGenerator<string> {
   const tokens = ["Hello", " from", " a", " simulated", " AI", " stream", "!"];
   for (const token of tokens) {
-    await new Promise(r => setTimeout(r, 100));  // Simulate network delay
+    await new Promise(resolve => setTimeout(resolve, 100));  // Simulate network delay
     yield `data: ${JSON.stringify({ token })}\n\n`;
   }
   yield "data: [DONE]\n\n";
@@ -219,7 +210,7 @@ function parseSSE(line: string): TokenEvent | null {
 async function* simulateStream(): AsyncGenerator<string> {
   const tokens = ["Hello", " from", " a", " simulated", " AI", " stream", "!"];
   for (const token of tokens) {
-    await new Promise(r => setTimeout(r, 100));
+    await new Promise(resolve => setTimeout(resolve, 100));
     yield `data: ${JSON.stringify({ token })}\n\n`;
   }
   yield "data: [DONE]\n\n";

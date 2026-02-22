@@ -48,29 +48,25 @@ Write a robust `safeFetch<T>` wrapper that:
 
 Test it with a valid URL and an invalid one (e.g., `https://jsonplaceholder.typicode.com/users/99999`).
 
-### Task 4: Compare to Python
+### Task 4: Add retry logic
 
-Here's the Python equivalent using httpx. Note the similarities:
+Network requests fail. Write a `fetchWithRetry` wrapper that retries a failed request up to `maxRetries` times before giving up:
 
-```python
-import httpx
-import asyncio
-
-async def fetch_user(user_id: int) -> dict:
-    async with httpx.AsyncClient() as client:
-        response = await client.get(f"https://jsonplaceholder.typicode.com/users/{user_id}")
-        response.raise_for_status()
-        return response.json()
-
-async def main():
-    users = await asyncio.gather(*[fetch_user(i) for i in range(1, 6)])
-    for user in users:
-        print(user["name"])
-
-asyncio.run(main())
+```typescript
+async function fetchWithRetry<T>(
+  url: string,
+  maxRetries: number
+): Promise<T> {
+  // Your code here
+}
 ```
 
-Notice: Python needs `asyncio.run()` to start the event loop. JavaScript doesn't — async code runs natively.
+Requirements:
+- Retry only on network errors or 5xx responses (not 4xx — those are client errors that won't get better on retry)
+- Throw after all retries are exhausted
+- Test it by temporarily using a bad URL to trigger failures
+
+This is the pattern you'll reach for when calling external APIs that occasionally return transient errors.
 
 <details>
 <summary>Solution</summary>
@@ -159,10 +155,53 @@ if (result2.ok) {
 }
 ```
 
+// --- Task 4: Retry wrapper ---
+
+async function fetchWithRetry<T>(url: string, maxRetries: number): Promise<T> {
+  let lastError: Error | undefined;
+
+  for (let attempt = 0; attempt <= maxRetries; attempt++) {
+    try {
+      const response = await fetch(url);
+
+      // 4xx errors are client mistakes — retrying won't help
+      if (response.status >= 400 && response.status < 500) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+
+      // 5xx errors are server-side — worth retrying
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+
+      return await response.json() as T;
+    } catch (error) {
+      lastError = error instanceof Error ? error : new Error(String(error));
+
+      // Don't retry 4xx errors
+      if (lastError.message.match(/^HTTP 4\d\d/)) throw lastError;
+
+      if (attempt < maxRetries) {
+        console.log(`Attempt ${attempt + 1} failed, retrying...`);
+      }
+    }
+  }
+
+  throw new Error(`Failed after ${maxRetries + 1} attempts: ${lastError?.message}`);
+}
+
+// Test
+const user = await fetchWithRetry<User>(
+  "https://jsonplaceholder.typicode.com/users/1",
+  3
+);
+console.log(`\nFetch with retry: ${user.name}`);
+```
+
 ### Key takeaways
-- `fetch` is built in (no npm package needed, unlike Python which needs `httpx` or `requests`)
-- `fetch` does NOT throw on 4xx/5xx — you must check `response.ok`
-- `response.json()` returns a Promise (must be awaited)
-- `as Promise<User>` is a type assertion — `fetch` returns `any`, so you tell TS what to expect
-- `Promise.all` with `.map()` is the standard pattern for parallel async operations
+- `fetch` does NOT throw on 4xx/5xx — you must check `response.ok` or `response.status`
+- `response.json()` returns a Promise — it must be awaited separately from `fetch`
+- `as Promise<User>` is a type assertion: `fetch` returns `any`, so you tell TS what to expect
+- `Promise.all` with `.map()` is the standard pattern for launching parallel async operations
+- Retry logic should distinguish transient server errors (5xx) from permanent client errors (4xx)
 </details>
