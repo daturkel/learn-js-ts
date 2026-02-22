@@ -19,7 +19,7 @@ export ANTHROPIC_API_KEY="sk-ant-..."
 export OPENAI_API_KEY="sk-..."   # optional — skip OpenAI tasks if you don't have a key
 ```
 
-## Requirements
+## Tasks
 
 ### 1. Basic Claude call
 

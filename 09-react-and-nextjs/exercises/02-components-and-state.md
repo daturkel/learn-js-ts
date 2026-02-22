@@ -6,7 +6,7 @@ Build an interactive ML hyperparameter tuning form using React components and `u
 
 Use the Next.js project from Exercise 01 (or create a new one).
 
-## Requirements
+## Tasks
 
 ### 1. Create a `HyperparameterSlider` component
 

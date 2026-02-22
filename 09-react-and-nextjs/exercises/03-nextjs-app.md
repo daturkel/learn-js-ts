@@ -6,7 +6,7 @@ Build a multi-page experiment dashboard with file-based routing, layouts, and dy
 
 Use your existing Next.js project or create a new one.
 
-## Requirements
+## Tasks
 
 ### 1. Create the experiments list page
 

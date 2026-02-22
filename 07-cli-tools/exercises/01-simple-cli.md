@@ -15,7 +15,7 @@ npm install commander chalk
 npm install -D typescript tsx
 ```
 
-## Requirements
+## Tasks
 
 Build `src/index.ts` that:
 

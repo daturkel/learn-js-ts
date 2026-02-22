@@ -12,7 +12,7 @@ npm install -D typescript
 
 Add to `package.json`: `"type": "module"`
 
-## Requirements
+## Tasks
 
 ### 1. Create a strict TypeScript project
 

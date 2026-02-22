@@ -22,7 +22,7 @@ Or create a `.env.local` file (Next.js auto-loads this):
 ANTHROPIC_API_KEY=sk-ant-...
 ```
 
-## Requirements
+## Tasks
 
 ### 1. Basic chat API route
 

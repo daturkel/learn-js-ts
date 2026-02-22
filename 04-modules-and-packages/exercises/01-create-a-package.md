@@ -6,7 +6,7 @@ Initialize a TypeScript project from scratch and build a working module.
 
 Set up a proper TypeScript project with `npm`, write a module with exports, and run it. This is the equivalent of setting up a Python project with `pyproject.toml`.
 
-## Steps
+## Tasks
 
 ### Step 1: Initialize the project
 

@@ -93,7 +93,7 @@ if __name__ == "__main__":
     main()
 ```
 
-## Your Task
+## Tasks
 
 1. Rewrite this entire script in TypeScript (`experiment-analysis.ts`)
 2. Define proper interfaces for all data structures (not just `dict`)

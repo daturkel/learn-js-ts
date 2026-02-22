@@ -15,7 +15,7 @@ npm install @inquirer/prompts chalk
 npm install -D typescript tsx
 ```
 
-## Requirements
+## Tasks
 
 Create `src/index.ts` that:
 

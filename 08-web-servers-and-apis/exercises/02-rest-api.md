@@ -11,7 +11,7 @@ npm install hono @hono/node-server zod
 npm install -D typescript tsx
 ```
 
-## Requirements
+## Tasks
 
 Build an API that manages ML experiments in memory (no database).
 

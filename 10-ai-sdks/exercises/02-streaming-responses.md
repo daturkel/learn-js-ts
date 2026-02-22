@@ -6,7 +6,7 @@ Stream tokens from AI models to the terminal in real time.
 
 Use the same project from Exercise 01.
 
-## Requirements
+## Tasks
 
 ### 1. Basic streaming with Anthropic
 

@@ -18,7 +18,7 @@ Tool use follows a loop:
 
 This is the same pattern regardless of SDK — Anthropic, OpenAI, or Vercel AI SDK.
 
-## Requirements
+## Tasks
 
 ### 1. Single tool call
 

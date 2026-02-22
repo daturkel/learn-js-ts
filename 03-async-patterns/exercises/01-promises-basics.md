@@ -60,7 +60,9 @@ function sendNotificationCallback(message: string, callback: (err: Error | null)
 }
 ```
 
-## Step 1: Wrap Each in a Promise
+## Tasks
+
+### Step 1: Wrap Each in a Promise
 
 Convert each function to return a `Promise` instead of using a callback.
 
@@ -132,7 +134,7 @@ function sendNotification(message: string): Promise<void> {
 The pattern is always the same: `new Promise((resolve, reject) => { ... })` wrapping the callback.
 </details>
 
-## Step 2: Chain with .then()
+### Step 2: Chain with .then()
 
 Using your Promise-based functions, chain these operations:
 1. Read "config.json"
@@ -169,7 +171,7 @@ readFileCallback("config.json", (err, data) => {
 The Promise chain is flat and readable. The callback version is nested.
 </details>
 
-## Step 3: Rewrite with async/await
+### Step 3: Rewrite with async/await
 
 Rewrite the same pipeline using `async/await`:
 
@@ -194,7 +196,7 @@ pipeline();
 This reads like synchronous Python code. Each `await` pauses until the Promise resolves, then continues.
 </details>
 
-## Step 4: Run operations in parallel
+### Step 4: Run operations in parallel
 
 Use `Promise.all` to run `readFile`, `queryDb`, and `fetchApi` concurrently:
 
@@ -224,7 +226,7 @@ parallelOps();
 Array destructuring `[fileData, dbRows, apiData]` extracts the results in order. `Promise.all` runs all three concurrently and waits for all to finish.
 </details>
 
-## Step 5: Handle mixed results
+### Step 5: Handle mixed results
 
 Use `Promise.allSettled` to run `readFile("config.json")`, `readFile("missing.txt")`, and `queryDb("SELECT 1")`. Log which succeeded and which failed:
 

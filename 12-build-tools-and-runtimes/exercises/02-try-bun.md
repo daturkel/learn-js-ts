@@ -15,7 +15,7 @@ Verify:
 bun --version
 ```
 
-## Requirements
+## Tasks
 
 ### 1. Run TypeScript directly
 

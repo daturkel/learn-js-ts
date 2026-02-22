@@ -13,7 +13,7 @@ npm install -D typescript tsx
 
 Add to `package.json`: `"type": "module"`
 
-## Requirements
+## Tasks
 
 Create `src/index.ts` with these routes:
 

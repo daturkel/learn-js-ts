@@ -41,7 +41,7 @@ Create a sample `config.json`:
 }
 ```
 
-## Your Task
+## Tasks
 
 Create `config.ts` that:
 

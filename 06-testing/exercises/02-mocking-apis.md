@@ -54,7 +54,7 @@ export async function getWeatherSummary(cities: string[]): Promise<string> {
 }
 ```
 
-## Your Task
+## Tasks
 
 Create `weather.test.ts` with these test cases:
 

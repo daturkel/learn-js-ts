@@ -81,7 +81,7 @@ export function mergeWithEnv(config: Config, env: Record<string, string | undefi
 }
 ```
 
-## Your Task
+## Tasks
 
 Create `config.test.ts` with tests covering:
 

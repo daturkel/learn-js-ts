@@ -15,9 +15,9 @@ Create a new file called `experiment-types.ts`.
 - To **type-check** without running: `tsc --strict --noEmit --target es2015 experiment-types.ts`
 - To **run** the file and see output: `tsx experiment-types.ts`
 
-## Requirements
+## Tasks
 
-### Step 1: Define the core types
+### Task 1: Define the core types
 
 Define interfaces/types for:
 
@@ -56,15 +56,15 @@ Define interfaces/types for:
    - `tags`: array of string
    - `createdAt`: Date
 
-### Step 2: Write typed functions
+### Task 2: Write typed functions
 
 Write these functions with full type annotations:
 
-1. `getCompletedRuns(experiment: Experiment): Run[]` — returns only completed runs
-2. `getBestMetric(run: Run, metricName: string): MetricValue | undefined` — finds the highest value for a given metric across all steps
-3. `summarizeExperiment(experiment: Experiment): ExperimentSummary` — returns a summary object (define the `ExperimentSummary` type yourself)
+1. **`getCompletedRuns`** — takes an experiment, returns only its completed runs
+2. **`getBestMetric`** — takes a run and a metric name, returns the metric entry with the highest value across all steps (or `undefined` if the metric isn't present)
+3. **`summarizeExperiment`** — takes an experiment and returns a summary object; define the `ExperimentSummary` type yourself based on what makes sense to include
 
-### Step 3: Create test data and verify
+### Task 3: Create test data and verify
 
 Create a sample experiment with 2-3 runs and call each function. Make sure TypeScript catches type errors — try passing wrong types intentionally.
 
@@ -259,24 +259,5 @@ console.log("Summary:", summarizeExperiment(experiment));
 // getBestMetric(experiment, "accuracy");  // Error: Experiment is not a Run
 ```
 
-### Python Equivalent
-
-```python
-from dataclasses import dataclass, field
-from typing import Literal, TypedDict
-from datetime import datetime
-
-class MetricValue(TypedDict):
-    name: str
-    value: float
-    step: int
-    timestamp: datetime | None
-
-Optimizer = Literal["adam", "sgd", "adamw"]
-RunStatus = Literal["pending", "running", "completed", "failed"]
-
-# In Python you'd use Pydantic or dataclasses.
-# TypeScript interfaces have NO runtime presence — they're compile-time only.
-# That's the biggest conceptual difference from Python's runtime type checking.
-```
+**Note:** TypeScript interfaces have no runtime presence — they're erased when compiled to JavaScript. There's nothing you can call or inspect at runtime. In Python, `TypedDict` and dataclasses do exist at runtime (you can iterate their fields, use them with Pydantic, etc.). This is one of the biggest conceptual differences between the two type systems.
 </details>

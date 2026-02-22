@@ -6,7 +6,7 @@ Add an API route that serves experiment data and fetch it from server and client
 
 Use your existing Next.js project from the previous exercises.
 
-## Requirements
+## Tasks
 
 ### 1. Create an API route
 

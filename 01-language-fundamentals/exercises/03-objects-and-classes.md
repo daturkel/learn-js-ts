@@ -6,7 +6,7 @@ Build an ML experiment tracker using JavaScript classes.
 
 Create classes that model ML experiments, similar to what you'd build with Python dataclasses. This exercise practices class syntax, object manipulation, and array methods together.
 
-## Requirements
+## Tasks
 
 ### 1. Create a `Run` class
 

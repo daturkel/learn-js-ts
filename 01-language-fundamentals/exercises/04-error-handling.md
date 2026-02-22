@@ -32,9 +32,9 @@ Rules:
 - `optimizer` — optional, defaults to `"adam"`, must be one of: `"adam"`, `"sgd"`, `"adamw"`
 - `notes` — optional, defaults to `""`
 
-## Your Task
+## Tasks
 
-### Step 1: Write `parseConfig(jsonString)`
+### Task 1: Write `parseConfig(jsonString)`
 
 The function should:
 - Parse the JSON string (handle invalid JSON gracefully)
@@ -42,14 +42,14 @@ The function should:
 - Return a clean config object with defaults applied
 - Throw `Error` with descriptive messages for validation failures
 
-### Step 2: Write `loadConfig(jsonString)`
+### Task 2: Write `loadConfig(jsonString)`
 
 A wrapper that calls `parseConfig` and handles errors:
 - If parsing succeeds, return `{ ok: true, config: ... }`
 - If parsing fails, return `{ ok: false, error: "..." }`
 - Never throws — always returns a result
 
-### Step 3: Test with these inputs
+### Task 3: Test with these inputs
 
 ```javascript
 // Should succeed

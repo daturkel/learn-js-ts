@@ -2,3 +2,4 @@
 .claude/
 plans/
 *.js
+**/exercises/*.ts

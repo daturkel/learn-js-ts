@@ -13,7 +13,7 @@ npm install -D typescript tsx esbuild
 
 Add to `package.json`: `"type": "module"`
 
-## Requirements
+## Tasks
 
 ### 1. Create a CLI tool
 

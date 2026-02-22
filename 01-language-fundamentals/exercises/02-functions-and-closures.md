@@ -41,7 +41,7 @@ for e in experiments:
 longest = max(experiments, key=lambda e: e["training_hours"])
 ```
 
-## Your Task
+## Tasks
 
 Rewrite each of the 6 tasks in JavaScript using array methods (`filter`, `map`, `sort`, `reduce`, `find`, etc.).
 
