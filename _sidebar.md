@@ -14,7 +14,7 @@
     - [Type Annotations](/02-typescript-essentials/exercises/01-type-annotations.md)
     - [Interfaces and Types](/02-typescript-essentials/exercises/02-interfaces-and-types.md)
     - [Generics](/02-typescript-essentials/exercises/03-generics.md)
-    - [Type a Python Script](/02-typescript-essentials/exercises/04-type-a-python-script.md)
+    - [Type Narrowing](/02-typescript-essentials/exercises/04-type-narrowing.md)
   - [03 — Async Patterns](/03-async-patterns/README.md)
     - [Promises Basics](/03-async-patterns/exercises/01-promises-basics.md)
     - [Async/Await](/03-async-patterns/exercises/02-async-await.md)
