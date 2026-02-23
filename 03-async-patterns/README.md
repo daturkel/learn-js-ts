@@ -99,7 +99,15 @@ promise
   .finally(() => console.log("cleanup")); // always runs
 ```
 
-**When do you actually write `new Promise`?** Rarely. The only time you need it is to wrap old callback-based APIs (like `setTimeout` or Node's `fs.readFile`) so they work with `await`. If a function already returns a Promise, just `await` it directly.
+**When do you actually write `new Promise`?** Rarely. Modern APIs — `fetch`, `fs.promises.readFile`, database clients, SDKs — already return Promises, so you just `await` them directly:
+
+```typescript
+const data = await fs.promises.readFile("config.json", "utf-8");
+const response = await fetch("https://api.example.com");
+const users = await db.query("SELECT * FROM users");
+```
+
+The only time you need `new Promise()` is to wrap an old callback-based API so it works with `await`. That's what exercise 1 covers — you'll write those wrappers once, then never think about `new Promise()` again.
 
 **Python comparison:** A Promise is like an `asyncio.Future` — an object you can await to get its result. But unlike Python futures, you interact with Promises via `.then()` chains or `await`.
 
