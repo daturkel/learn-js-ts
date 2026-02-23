@@ -74,8 +74,8 @@ When you create `new Promise(...)`, JavaScript calls your function immediately a
 
 ```mermaid
 sequenceDiagram
-    participant You as Your executor function
     participant JS as JavaScript
+    participant You as Your executor function
     participant Handler as .then / .catch
 
     JS->>You: calls executor with (resolve, reject)
