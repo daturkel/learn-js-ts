@@ -99,6 +99,8 @@ promise
   .finally(() => console.log("cleanup")); // always runs
 ```
 
+`.then()` can take a second argument as an inline rejection handler: `.then(onFulfilled, onRejected)`. You'll see this occasionally, but `.catch()` is more common and clearer. One difference: the second argument to `.then()` only catches rejections from the *original* promise — it won't catch errors thrown inside `onFulfilled`, whereas a chained `.catch()` will.
+
 **When do you actually write `new Promise`?** Rarely. Modern APIs — `fetch`, `fs.promises.readFile`, database clients, SDKs — already return Promises, so you just `await` them directly:
 
 ```typescript
