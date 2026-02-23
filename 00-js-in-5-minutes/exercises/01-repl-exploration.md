@@ -1,6 +1,5 @@
 # Exercise 01: REPL Exploration
 
-**Time:** ~20 minutes
 
 Get familiar with JavaScript syntax by experimenting in the Node.js REPL, comparing what you already know from Python.
 

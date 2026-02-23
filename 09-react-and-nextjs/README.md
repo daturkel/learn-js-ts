@@ -2,7 +2,6 @@
 
 Build web UIs with React components and full-stack apps with Next.js.
 
-**Time:** 2-3 sessions
 
 ## Why React?
 

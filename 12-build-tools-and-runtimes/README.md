@@ -2,7 +2,6 @@
 
 Understand the JS/TS toolchain: TypeScript configuration, bundling, and alternative runtimes.
 
-**Time:** 1-2 sessions
 
 ## Why This Module?
 

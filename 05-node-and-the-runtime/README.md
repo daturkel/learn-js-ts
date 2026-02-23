@@ -2,7 +2,6 @@
 
 Node.js standard library and runtime APIs, mapped from Python equivalents.
 
-**Time:** 1-2 sessions
 
 ## Key Difference: Node's stdlib is Thin
 

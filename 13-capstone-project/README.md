@@ -2,7 +2,6 @@
 
 Apply everything you've learned by building a complete project.
 
-**Time:** 3-5 sessions
 
 ## Goal
 

@@ -2,7 +2,6 @@
 
 Build Model Context Protocol (MCP) servers that give AI models access to your tools and data.
 
-**Time:** 1-2 sessions
 
 ## What is MCP?
 

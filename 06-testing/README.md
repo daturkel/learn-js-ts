@@ -2,7 +2,6 @@
 
 Testing in JavaScript/TypeScript with Vitest, compared to Python's pytest.
 
-**Time:** 1-2 sessions
 
 ## Vitest — The Modern Test Runner
 

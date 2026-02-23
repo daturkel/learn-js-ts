@@ -2,7 +2,6 @@
 
 Build command-line tools in TypeScript using Commander and Inquirer.
 
-**Time:** 1-2 sessions
 
 ## Why Build CLIs in JS/TS?
 

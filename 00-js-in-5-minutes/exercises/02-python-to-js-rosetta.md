@@ -1,6 +1,5 @@
 # Exercise 02: Python to JS Rosetta Stone
 
-**Time:** ~30 minutes
 
 Translate five small Python programs into JavaScript. This builds muscle memory for the syntax differences you explored in Exercise 01.
 

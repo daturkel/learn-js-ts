@@ -26,24 +26,22 @@ A self-paced curriculum for experienced Python engineers who want to build AI-po
 
 ## Modules
 
-| # | Module | Focus | Sessions |
-|---|--------|-------|----------|
-| 00 | [JS in 5 Minutes](./00-js-in-5-minutes/README.md) | Orientation | 1 |
-| 01 | [Language Fundamentals](./01-language-fundamentals/README.md) | Core JS syntax | 2-3 |
-| 02 | [TypeScript Essentials](./02-typescript-essentials/README.md) | Type system | 2-3 |
-| 03 | [Async Patterns](./03-async-patterns/README.md) | Promises, streams | 2-3 |
-| 04 | [Modules & Packages](./04-modules-and-packages/README.md) | npm, imports | 1-2 |
-| 05 | [Node.js Runtime](./05-node-and-the-runtime/README.md) | File I/O, process | 1-2 |
-| 06 | [Testing](./06-testing/README.md) | Vitest | 1-2 |
-| 07 | [CLI Tools](./07-cli-tools/README.md) | Commander, Inquirer | 1-2 |
-| 08 | [Web Servers](./08-web-servers-and-apis/README.md) | Hono, REST APIs | 2-3 |
-| 09 | [React & Next.js](./09-react-and-nextjs/README.md) | Components, full-stack | 2-3 |
-| 10 | [AI SDKs](./10-ai-sdks/README.md) | Anthropic, Vercel AI | 2-3 |
-| 11 | [MCP Servers](./11-mcp-servers/README.md) | Model Context Protocol | 2-3 |
-| 12 | [Build Tools](./12-build-tools-and-runtimes/README.md) | tsconfig, Bun, esbuild | 1-2 |
-| 13 | [Capstone](./13-capstone-project/README.md) | Integrate everything | 3-5 |
-
-**Total: ~30-40 focused sessions**
+| # | Module | Focus |
+|---|--------|-------|
+| 00 | [JS in 5 Minutes](./00-js-in-5-minutes/README.md) | Orientation |
+| 01 | [Language Fundamentals](./01-language-fundamentals/README.md) | Core JS syntax |
+| 02 | [TypeScript Essentials](./02-typescript-essentials/README.md) | Type system |
+| 03 | [Async Patterns](./03-async-patterns/README.md) | Promises, streams |
+| 04 | [Modules & Packages](./04-modules-and-packages/README.md) | npm, imports |
+| 05 | [Node.js Runtime](./05-node-and-the-runtime/README.md) | File I/O, process |
+| 06 | [Testing](./06-testing/README.md) | Vitest |
+| 07 | [CLI Tools](./07-cli-tools/README.md) | Commander, Inquirer |
+| 08 | [Web Servers](./08-web-servers-and-apis/README.md) | Hono, REST APIs |
+| 09 | [React & Next.js](./09-react-and-nextjs/README.md) | Components, full-stack |
+| 10 | [AI SDKs](./10-ai-sdks/README.md) | Anthropic, Vercel AI |
+| 11 | [MCP Servers](./11-mcp-servers/README.md) | Model Context Protocol |
+| 12 | [Build Tools](./12-build-tools-and-runtimes/README.md) | tsconfig, Bun, esbuild |
+| 13 | [Capstone](./13-capstone-project/README.md) | Integrate everything |
 
 ## Quick Reference
 

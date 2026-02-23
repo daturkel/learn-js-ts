@@ -2,7 +2,6 @@
 
 Core JavaScript syntax and semantics, mapped from Python equivalents. This module covers everything you need to read and write everyday JS.
 
-**Time:** 2-3 sessions
 
 ## Variables and Declarations
 

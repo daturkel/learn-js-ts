@@ -2,7 +2,6 @@
 
 Build HTTP servers and REST APIs with Hono, compared to Python's FastAPI.
 
-**Time:** 2-3 sessions
 
 ## Hono — Like FastAPI for JavaScript
 

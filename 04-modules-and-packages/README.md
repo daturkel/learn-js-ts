@@ -382,8 +382,8 @@ The `^` (caret) is the default and most common. It allows non-breaking updates.
 
 ## Next Steps
 
-1. Do [Exercise 01: Create a Package](./exercises/01-create-a-package.md) (~30 minutes)
-2. Do [Exercise 02: Multi-Package Workspace](./exercises/02-publish-local-package.md) (~45 minutes)
+1. Do [Exercise 01: Create a Package](./exercises/01-create-a-package.md)
+2. Do [Exercise 02: Multi-Package Workspace](./exercises/02-publish-local-package.md)
 3. Move on to [Module 05: Node.js and the Runtime](../05-node-and-the-runtime/README.md)
 
 ---

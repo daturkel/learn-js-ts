@@ -2,7 +2,6 @@
 
 Use the Anthropic, OpenAI, and Vercel AI SDKs to build AI-powered applications in TypeScript.
 
-**Time:** 2-3 sessions
 
 ## Why AI SDKs in TypeScript?
 

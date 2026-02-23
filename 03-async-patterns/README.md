@@ -2,7 +2,6 @@
 
 The single most important conceptual module. JavaScript's async model is the biggest paradigm shift from Python.
 
-**Time:** 2-3 sessions
 
 ## The Event Loop
 
