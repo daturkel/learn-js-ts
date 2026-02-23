@@ -355,10 +355,8 @@ setTimeout(() => console.log("delayed"), 1000);
 const intervalId = setInterval(() => console.log("tick"), 1000);
 clearInterval(intervalId);  // Stop it
 
-// Awaitable sleep:
-// `resolve` is the fulfillment callback the Promise passes to your executor.
-// Giving it directly to `setTimeout` means: "call resolve() after ms milliseconds."
-// When resolve() is called with no argument, the promise fulfills with `undefined`.
+// Awaitable sleep: passing `resolve` directly to setTimeout means
+// "call resolve() after ms milliseconds", which fulfills the promise.
 const sleep = (ms: number) => new Promise<void>(resolve => setTimeout(resolve, ms));
 await sleep(1000);  // Wait 1 second
 ```

@@ -76,9 +76,6 @@ Example for the first one:
 
 ```typescript
 function readFile(filename: string): Promise<string> {
-  // `resolve` and `reject` are not keywords — they're parameter names for two
-  // functions the Promise runtime provides. Call resolve(value) to fulfill the
-  // promise, or reject(reason) to fail it. You must call exactly one of them.
   return new Promise((resolve, reject) => {
     readFileCallback(filename, (err, data) => {
       if (err) reject(err);
@@ -143,8 +140,6 @@ function sendNotification(message: string): Promise<void> {
 
 The pattern is always the same: `new Promise((resolve, reject) => { ... })` wrapping the callback.
 
-`resolve` and `reject` are just parameter names — not JS keywords. The Promise
-constructor passes two functions into your executor: call one to settle the promise.
 The `!` (non-null assertion) after `data` and `rows` tells TypeScript "I know this
 isn't undefined here" — safe because the callback only passes a value when `err` is null.
 </details>
