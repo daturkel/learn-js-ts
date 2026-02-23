@@ -191,30 +191,30 @@ async function fetchWithRetry<T>(url: string, maxRetries: number): Promise<T> {
   let lastError: Error | undefined;
 
   for (let attempt = 0; attempt <= maxRetries; attempt++) {
+    let response: Response;
+
     try {
-      const response = await fetch(url);
-
-      // 4xx errors are client mistakes — retrying won't help
-      if (response.status >= 400 && response.status < 500) {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-      }
-
-      // 5xx errors are server-side — worth retrying
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-      }
-
-      return await response.json() as T;
-    } catch (error) {
-      lastError = error instanceof Error ? error : new Error(String(error));
-
-      // Don't retry 4xx errors
-      if (lastError.message.match(/^HTTP 4\d\d/)) throw lastError;
-
-      if (attempt < maxRetries) {
-        console.log(`Attempt ${attempt + 1} failed, retrying...`);
-      }
+      response = await fetch(url);
+    } catch (err) {
+      // Network error — retryable
+      lastError = err instanceof Error ? err : new Error(String(err));
+      if (attempt < maxRetries) console.log(`Attempt ${attempt + 1} failed, retrying...`);
+      continue;
     }
+
+    // 4xx: permanent client error, don't retry
+    if (response.status >= 400 && response.status < 500) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+
+    // 5xx: transient server error — retryable
+    if (!response.ok) {
+      lastError = new Error(`HTTP ${response.status}: ${response.statusText}`);
+      if (attempt < maxRetries) console.log(`Attempt ${attempt + 1} failed, retrying...`);
+      continue;
+    }
+
+    return response.json() as Promise<T>;
   }
 
   throw new Error(`Failed after ${maxRetries + 1} attempts: ${lastError?.message}`);
