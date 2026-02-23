@@ -204,6 +204,8 @@ pipeline();
 ```
 
 This reads like synchronous Python code. Each `await` pauses until the Promise resolves, then continues.
+
+`pipeline` has no explicit return type — TypeScript infers `Promise<void>` because it's `async` and returns nothing. Explicit annotations (`async function pipeline(): Promise<void>`) are common on exported functions but optional here.
 </details>
 
 ### Task 4: Run operations in parallel
