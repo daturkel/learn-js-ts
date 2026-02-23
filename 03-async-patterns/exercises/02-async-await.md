@@ -34,6 +34,8 @@ async function fetchUser(id: number): Promise<User> {
 }
 ```
 
+**Note on type safety:** When you cast `response.json()` to `Promise<User>`, TypeScript takes your word for it. There's no runtime check that the API actually returned the right shape — if it returns something unexpected, TypeScript won't warn you and your code will silently break when it tries to access a missing field. This is a fundamental limitation: TypeScript types are erased at runtime, so external data (API responses, JSON files, user input) is always an unverified assertion at the boundary. Runtime validation with Zod (covered in Module 08) is how you make that boundary safe in production code.
+
 ### Task 2: Fetch multiple users
 
 Fetch users 1 through 5 concurrently using `Promise.all`. Print each user's name.
@@ -153,7 +155,6 @@ if (result2.ok) {
   console.log(`Safe fetch failed: ${result2.error}`);
   // "HTTP 404: Not Found"
 }
-```
 
 // --- Task 4: Retry wrapper ---
 
