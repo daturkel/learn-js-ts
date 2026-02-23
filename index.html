@@ -44,6 +44,28 @@
         buttonText: 'Copy',
         successText: 'Copied',
       },
+      plugins: [
+        function (hook) {
+          hook.ready(function () {
+            if (localStorage.getItem('sidebar-closed') === 'true') {
+              var style = document.createElement('style');
+              style.textContent = '* { transition: none !important; }';
+              document.head.appendChild(style);
+              document.body.classList.add('close');
+              requestAnimationFrame(function () {
+                requestAnimationFrame(function () {
+                  document.head.removeChild(style);
+                });
+              });
+            }
+            document.querySelector('.sidebar-toggle').addEventListener('click', function () {
+              setTimeout(function () {
+                localStorage.setItem('sidebar-closed', document.body.classList.contains('close'));
+              }, 0);
+            });
+          });
+        },
+      ],
     };
   </script>
   <!-- Docsify core -->
