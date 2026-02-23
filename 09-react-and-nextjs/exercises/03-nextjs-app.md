@@ -56,6 +56,16 @@ Create a `StatusBadge` component that color-codes the experiment status:
 
 Add an "Experiments" link to the root layout's nav bar.
 
+## Verify
+
+Run `npm run dev` and check:
+- `http://localhost:3000/experiments` — table of 5 experiments, each linking to its detail page
+- `http://localhost:3000/experiments/1` — detail page for BERT Sentiment
+- `http://localhost:3000/experiments/999` — "Experiment not found" message
+- Any `/experiments/*` page — sidebar appears; home page — sidebar does NOT appear
+- Status badges are color-coded (green/blue/red/gray)
+- Nav bar includes an "Experiments" link
+
 ## Key Concepts
 
 **Dynamic routes** use bracket folders: `[id]`, `[slug]`, etc. The param is available in the page component's props:

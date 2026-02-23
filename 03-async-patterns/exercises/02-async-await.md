@@ -36,9 +36,24 @@ async function fetchUser(id: number): Promise<User> {
 
 **Note on type safety:** When you cast `response.json()` to `Promise<User>`, TypeScript takes your word for it. There's no runtime check that the API actually returned the right shape — if it returns something unexpected, TypeScript won't warn you and your code will silently break when it tries to access a missing field. This is a fundamental limitation: TypeScript types are erased at runtime, so external data (API responses, JSON files, user input) is always an unverified assertion at the boundary. Runtime validation with Zod (covered in Module 08) is how you make that boundary safe in production code.
 
+Test it:
+
+```typescript
+const user = await fetchUser(1);
+console.log(`${user.name} — ${user.email}`);
+// Leanne Graham — Sincere@april.biz
+```
+
 ### Task 2: Fetch multiple users
 
 Fetch users 1 through 5 concurrently using `Promise.all`. Print each user's name.
+
+Test it:
+
+```typescript
+const users = await Promise.all([1, 2, 3, 4, 5].map(fetchUser));
+users.forEach(u => console.log(u.name));
+```
 
 ### Task 3: Error handling
 
@@ -48,7 +63,15 @@ Write a robust `safeFetch<T>` wrapper that:
 - Handles: network errors, non-200 status codes, JSON parse errors
 - Takes a URL and returns a typed result
 
-Test it with a valid URL and an invalid one (e.g., `https://jsonplaceholder.typicode.com/users/99999`).
+Test it:
+
+```typescript
+const good = await safeFetch<User>("https://jsonplaceholder.typicode.com/users/1");
+console.log(good); // { ok: true, data: { id: 1, name: "Leanne Graham", ... } }
+
+const bad = await safeFetch<User>("https://jsonplaceholder.typicode.com/users/99999");
+console.log(bad); // { ok: false, error: "HTTP 404: Not Found" }
+```
 
 ### Task 4: Add retry logic
 
@@ -66,7 +89,18 @@ async function fetchWithRetry<T>(
 Requirements:
 - Retry only on network errors or 5xx responses (not 4xx — those are client errors that won't get better on retry)
 - Throw after all retries are exhausted
-- Test it by temporarily using a bad URL to trigger failures
+
+Test it:
+
+```typescript
+const user = await fetchWithRetry<User>(
+  "https://jsonplaceholder.typicode.com/users/1",
+  3
+);
+console.log(user.name); // Leanne Graham
+```
+
+To test retry behavior, temporarily swap the URL for a bad one and verify it retries before throwing.
 
 This is the pattern you'll reach for when calling external APIs that occasionally return transient errors.
 

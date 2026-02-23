@@ -83,6 +83,15 @@ All state lives in the page component and is passed down via props.
 
 Update `app/layout.tsx` to include a link to `/tuning`.
 
+## Verify
+
+Run `npm run dev` and visit `http://localhost:3000/tuning`. Check:
+- Moving a slider updates the displayed value in real time
+- Selecting a different model updates the configuration summary
+- The estimated accuracy changes as you adjust hyperparameters
+- Clicking "Reset Defaults" restores all values
+- The nav bar includes a "Tuning" link
+
 ## Key Concepts
 
 **State lives in the parent, not the child.** The page owns the state. Children receive values via props and notify the parent via callback functions (`onChange`, `onSelect`). This is called "lifting state up."
