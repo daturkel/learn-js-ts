@@ -11,27 +11,22 @@ Unlike languages where you can reach for threads or separate processes to run wo
 
 ### How it works
 
-```
-┌─────────────────────────┐
-│       Call Stack        │  ← Executes one function at a time
-└──────────┬──────────────┘
-           │ (when stack is empty)
-           ▼
-┌─────────────────────────┐
-│     Microtask Queue     │  ← Promise callbacks (.then), queueMicrotask
-└──────────┬──────────────┘
-           │ (when microtasks are done)
-           ▼
-┌─────────────────────────┐
-│       Task Queue        │  ← setTimeout callbacks, I/O callbacks
-└─────────────────────────┘
+```mermaid
+flowchart LR
+    CS["Call Stack\n(runs your code)"]
+    MQ["Microtask Queue\n(Promise .then callbacks)"]
+    TQ["Task Queue\n(setTimeout, I/O callbacks)"]
+
+    CS -->|"stack empties"| MQ
+    MQ -->|"microtasks done"| TQ
+    TQ -->|"next task"| CS
 ```
 
 1. Code runs on the call stack
-2. Async operations (fetch, setTimeout, fs.readFile) are handed off to the runtime
+2. Async operations (`fetch`, `setTimeout`, `fs.readFile`) are handed off to the runtime — they don't block the stack
 3. When an async operation completes, its callback goes into a queue
-4. When the call stack is empty, the event loop pulls from the queues
-5. Microtasks (Promise callbacks) have priority over regular tasks
+4. When the call stack is empty, the event loop pulls from the queues — microtasks first, then tasks
+5. Your callback runs on the stack, just like regular code
 
 The key insight: **nothing runs in parallel**. Only one piece of your code runs at a time. "Async" means "I'll come back to this later" — not "run this on another thread."
 
@@ -75,27 +70,36 @@ You won't write callbacks often, but you need to recognize them. Modern code use
 
 A Promise is an object that represents a value that will be available in the future. Think of it as a receipt for an async operation.
 
+When you create `new Promise(...)`, JavaScript calls your function immediately and hands you two callbacks: `resolve` and `reject`. You don't define them — JavaScript provides them. You just call one when your work is done:
+
+```mermaid
+sequenceDiagram
+    participant You as Your executor function
+    participant JS as JavaScript
+    participant Handler as .then / .catch
+
+    JS->>You: calls executor with (resolve, reject)
+    Note over You: start async work...
+    You->>JS: resolve("done!") — work succeeded
+    Note over JS: Promise state: fulfilled
+    JS->>Handler: runs .then(result => ...)
+```
+
 ```typescript
-// Creating a Promise
-// `resolve` and `reject` are parameter names, not keywords.
-// The Promise constructor calls your function and passes two callbacks:
-//   resolve(value) — fulfills the promise with a value
-//   reject(reason) — rejects the promise with an error
-// You can name them anything, but `resolve`/`reject` is the convention.
 const promise = new Promise<string>((resolve, reject) => {
-  // Simulate async work
   setTimeout(() => {
-    resolve("done!");       // Calls the resolve callback — fulfills the promise
-    // reject(new Error("failed"));  // Calls the reject callback — rejects it
+    resolve("done!");                    // call resolve on success
+    // reject(new Error("failed"));     // call reject on failure
   }, 1000);
 });
 
-// Consuming a Promise
 promise
   .then(result => console.log(result))    // "done!"
-  .catch(error => console.error(error))   // Only runs if rejected
-  .finally(() => console.log("cleanup")); // Always runs
+  .catch(error => console.error(error))   // only if rejected
+  .finally(() => console.log("cleanup")); // always runs
 ```
+
+**When do you actually write `new Promise`?** Rarely. The only time you need it is to wrap old callback-based APIs (like `setTimeout` or Node's `fs.readFile`) so they work with `await`. If a function already returns a Promise, just `await` it directly.
 
 **Python comparison:** A Promise is like an `asyncio.Future` — an object you can await to get its result. But unlike Python futures, you interact with Promises via `.then()` chains or `await`.
 
@@ -121,6 +125,25 @@ async function fetchUser(userId: number): Promise<Record<string, unknown>> {
   if (!response.ok) throw new Error(`HTTP ${response.status}`);
   return response.json();
 }
+```
+
+When a function hits `await`, it suspends — returning control to the event loop so other queued work can run. When the awaited Promise resolves, the function resumes from where it left off. This is not blocking: the thread is free the whole time.
+
+```mermaid
+sequenceDiagram
+    participant F as fetchUser()
+    participant EL as Event Loop
+    participant Net as Network
+
+    F->>Net: await fetch(url)
+    Note over F: suspended — not blocking the thread
+    Note over EL: other queued tasks run here
+    Net-->>F: response arrives, resume
+    F->>F: check response.ok
+    F->>Net: await response.json()
+    Note over F: suspended again
+    Net-->>F: JSON parsed, resume
+    F->>F: return user object
 ```
 
 If you've used Python's `async/await`, the syntax is nearly identical. A few differences worth knowing:
