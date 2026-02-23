@@ -217,3 +217,7 @@ Run it on this curriculum directory to see real output:
 npx tsx src/index.ts ../../ --extension .md
 ```
 </details>
+
+---
+
+**Next:** [Exercise 2: Interactive CLI →](/07-cli-tools/exercises/02-interactive-cli.md)

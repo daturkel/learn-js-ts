@@ -242,3 +242,7 @@ The generic syntax is quite similar:
 - Python: `T = TypeVar("T")` then `def fn(x: T) -> T`
 - TypeScript: `function fn<T>(x: T): T` — type param is inline, no separate declaration
 </details>
+
+---
+
+**Next:** [Exercise 4: Type Narrowing →](/02-typescript-essentials/exercises/04-type-narrowing.md)

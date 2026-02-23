@@ -184,3 +184,7 @@ For the projects in this curriculum, everything should work.
 | `npm run dev` | `bun run dev` |
 
 </details>
+
+---
+
+**Next:** [Exercise 3: Bundle for Distribution →](/12-build-tools-and-runtimes/exercises/03-bundle-for-distribution.md)

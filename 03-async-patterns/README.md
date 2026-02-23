@@ -2,7 +2,6 @@
 
 The single most important conceptual module. JavaScript's async model is the biggest paradigm shift from Python.
 
-**Prerequisites:** [Module 01](../01-language-fundamentals/README.md), [Module 02](../02-typescript-essentials/README.md)
 **Time:** 2-3 sessions
 
 ## The Event Loop
@@ -371,4 +370,6 @@ try {
 3. [Parallel Requests](./exercises/03-parallel-requests.md) — Build a concurrent fetcher with limits
 4. [Streaming](./exercises/04-streaming.md) — Process streaming responses
 
-Next: [Module 04 — Modules and Packages](../04-modules-and-packages/README.md)
+---
+
+**Next:** [Exercise 1: Promises Basics →](/03-async-patterns/exercises/01-promises-basics.md)

@@ -217,3 +217,7 @@ const makeThresholdFilter = (minAccuracy) => {
 
 This pattern — a function that returns a configured function — is common in JS. You'll see it in middleware, event handlers, and React hooks.
 </details>
+
+---
+
+**Next:** [Exercise 3: Objects and Classes →](/01-language-fundamentals/exercises/03-objects-and-classes.md)

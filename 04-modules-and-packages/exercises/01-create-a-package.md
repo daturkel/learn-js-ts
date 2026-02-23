@@ -199,3 +199,7 @@ stats-lib/
     ├── index.js
     └── index.d.ts
 ```
+
+---
+
+**Next:** [Exercise 2: Publish Local Package →](/04-modules-and-packages/exercises/02-publish-local-package.md)

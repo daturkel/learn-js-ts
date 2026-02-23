@@ -2,7 +2,6 @@
 
 Node.js standard library and runtime APIs, mapped from Python equivalents.
 
-**Prerequisites:** [Module 04](../04-modules-and-packages/README.md)
 **Time:** 1-2 sessions
 
 ## Key Difference: Node's stdlib is Thin
@@ -259,4 +258,6 @@ console.log(stdout);
 2. [Env Config](./exercises/02-env-config.md) — Build a typed configuration loader
 3. [Child Processes](./exercises/03-child-processes.md) — Analyze git log output
 
-Next: [Module 06 — Testing](../06-testing/README.md)
+---
+
+**Next:** [Exercise 1: File Processing →](/05-node-and-the-runtime/exercises/01-file-processing.md)

@@ -104,3 +104,7 @@ Answer these questions (check your answers by experimenting):
 - `app/experiments/layout.tsx` wraps only pages under `/experiments/*` (not the home page)
 - `layout.tsx` persists across navigations (doesn't re-render). `page.tsx` is the actual page content that changes.
 </details>
+
+---
+
+**Next:** [Exercise 2: Components and State →](/09-react-and-nextjs/exercises/02-components-and-state.md)

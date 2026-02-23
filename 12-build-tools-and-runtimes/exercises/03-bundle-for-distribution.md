@@ -269,3 +269,7 @@ After bundling, you can:
 3. **Link locally** — `npm link`, then use `fstat` anywhere on your machine
 
 </details>
+
+---
+
+**Next:** [Module 13: Capstone Project →](/13-capstone-project/README.md)

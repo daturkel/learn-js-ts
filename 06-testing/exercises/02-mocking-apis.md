@@ -261,3 +261,7 @@ Key differences:
 - Both support `mockResolvedValue` / `return_value` for return values
 - JS `beforeEach` + `mockReset` serves the same role as Python's automatic mock cleanup
 </details>
+
+---
+
+**Next:** [Module 07: CLI Tools →](/07-cli-tools/README.md)

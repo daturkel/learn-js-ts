@@ -288,3 +288,7 @@ Without the Vercel AI SDK, you'd need to:
 The `useChat` hook handles all of this in one line.
 
 </details>
+
+---
+
+**Next:** [Module 11: MCP Servers →](/11-mcp-servers/README.md)

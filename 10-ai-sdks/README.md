@@ -2,7 +2,6 @@
 
 Use the Anthropic, OpenAI, and Vercel AI SDKs to build AI-powered applications in TypeScript.
 
-**Prerequisites:** [Module 08](../08-web-servers-and-apis/README.md), [Module 09](../09-react-and-nextjs/README.md)
 **Time:** 2-3 sessions
 
 ## Why AI SDKs in TypeScript?
@@ -320,4 +319,6 @@ Or create a `.env` file (and add `.env` to `.gitignore`).
 3. [Tool Use](./exercises/03-tool-use.md) — Give the model functions to call
 4. [Vercel AI SDK](./exercises/04-vercel-ai-sdk.md) — Build a streaming chat UI with Next.js
 
-Next: [Module 11 — MCP Servers](../11-mcp-servers/README.md)
+---
+
+**Next:** [Exercise 1: Chat Completion →](/10-ai-sdks/exercises/01-chat-completion.md)

@@ -2,7 +2,6 @@
 
 Core JavaScript syntax and semantics, mapped from Python equivalents. This module covers everything you need to read and write everyday JS.
 
-**Prerequisites:** [Module 00](../00-js-in-5-minutes/README.md)
 **Time:** 2-3 sessions
 
 ## Variables and Declarations
@@ -624,4 +623,6 @@ Generators are used less in JS than Python because JS favors array methods (map/
 3. [Objects and Classes](./exercises/03-objects-and-classes.md) — Build an experiment tracker
 4. [Error Handling](./exercises/04-error-handling.md) — Write a config parser
 
-Next: [Module 02 — TypeScript Essentials](../02-typescript-essentials/README.md)
+---
+
+**Next:** [Exercise 1: Types and Variables →](/01-language-fundamentals/exercises/01-types-and-variables.md)

@@ -205,3 +205,7 @@ console.log(`\nFetch with retry: ${user.name}`);
 - `Promise.all` with `.map()` is the standard pattern for launching parallel async operations
 - Retry logic should distinguish transient server errors (5xx) from permanent client errors (4xx)
 </details>
+
+---
+
+**Next:** [Exercise 3: Parallel Requests →](/03-async-patterns/exercises/03-parallel-requests.md)

@@ -215,3 +215,7 @@ if (features.includes("docker")) {
 console.log(chalk.green(`✓ Project created in ./${projectName}/`));
 ```
 </details>
+
+---
+
+**Next:** [Module 08: Web Servers & APIs →](/08-web-servers-and-apis/README.md)

@@ -239,3 +239,7 @@ greet(42, "Alice");          // Error: types are swapped
 doubleAll(["a", "b", "c"]); // Error: string[] is not number[]
 safeDivide("10", 2);        // Error: string is not number
 ```
+
+---
+
+**Next:** [Exercise 2: Interfaces and Types →](/02-typescript-essentials/exercises/02-interfaces-and-types.md)

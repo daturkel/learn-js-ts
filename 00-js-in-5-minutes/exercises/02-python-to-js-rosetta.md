@@ -523,4 +523,6 @@ You've now translated five common Python patterns into JavaScript. The patterns 
 4. **Classes** are nearly identical, just different keywords
 5. **Error handling** uses `try/catch` and `throw new Error()`
 
-Next: [Module 01: Language Fundamentals](../../01-language-fundamentals/README.md)
+---
+
+**Next:** [Module 01: Language Fundamentals →](/01-language-fundamentals/README.md)

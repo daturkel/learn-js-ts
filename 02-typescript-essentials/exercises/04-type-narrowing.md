@@ -308,3 +308,7 @@ console.log(describeResponse({ ok: false, error: "invalid_key" }));
 
 **In practice:** Most TypeScript codebases use a validation library rather than writing this manually. [Zod](https://zod.dev) is the standard choice — you define a schema once and get both runtime validation and TypeScript types derived from it automatically. The manual approach here is worth understanding (it's what libraries like Zod do internally, and it appears in zero-dependency code), but in application code you'd reach for Zod instead. It's covered in Module 08.
 </details>
+
+---
+
+**Next:** [Module 03: Async Patterns →](/03-async-patterns/README.md)

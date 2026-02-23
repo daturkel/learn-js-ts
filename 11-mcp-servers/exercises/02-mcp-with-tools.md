@@ -510,3 +510,7 @@ This is a practical server you can actually use. Add it to Claude Desktop and as
 - "The DistilBERT NER experiment failed — help me debug it"
 
 </details>
+
+---
+
+**Next:** [Module 12: Build Tools & Runtimes →](/12-build-tools-and-runtimes/README.md)

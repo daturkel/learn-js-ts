@@ -87,3 +87,7 @@ Each builds on the previous modules. The early modules (00-03) are about learnin
 1. Do [Exercise 01: REPL Exploration](./exercises/01-repl-exploration.md) (~20 minutes)
 2. Do [Exercise 02: Python to JS Rosetta Stone](./exercises/02-python-to-js-rosetta.md) (~30 minutes)
 3. Move on to [Module 01: Language Fundamentals](../01-language-fundamentals/README.md)
+
+---
+
+**Next:** [Exercise 1: REPL Exploration →](/00-js-in-5-minutes/exercises/01-repl-exploration.md)

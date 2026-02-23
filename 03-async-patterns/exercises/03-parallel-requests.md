@@ -225,3 +225,7 @@ The key is `Promise.race(executing)`. It resolves as soon as ANY promise in the 
 
 This pattern — a fixed-size pool that refills as work completes — is a fundamental async concurrency primitive, and here you've built it from scratch using only `Promise.race`.
 </details>
+
+---
+
+**Next:** [Exercise 4: Streaming →](/03-async-patterns/exercises/04-streaming.md)

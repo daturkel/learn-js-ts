@@ -2,7 +2,6 @@
 
 Build web UIs with React components and full-stack apps with Next.js.
 
-**Prerequisites:** [Module 08](../08-web-servers-and-apis/README.md)
 **Time:** 2-3 sessions
 
 ## Why React?
@@ -358,4 +357,6 @@ export async function POST(request: Request) {
 3. [Next.js App](./exercises/03-nextjs-app.md) — Multi-page experiment dashboard
 4. [Data Fetching](./exercises/04-data-fetching.md) — API routes and server components
 
-Next: [Module 10 — AI SDKs](../10-ai-sdks/README.md)
+---
+
+**Next:** [Exercise 1: First React App →](/09-react-and-nextjs/exercises/01-first-react-app.md)

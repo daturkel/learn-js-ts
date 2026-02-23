@@ -257,3 +257,7 @@ The pattern is always the same:
 - Parse each complete message
 - Process incrementally (print tokens as they arrive)
 </details>
+
+---
+
+**Next:** [Module 04: Modules & Packages →](/04-modules-and-packages/README.md)

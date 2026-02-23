@@ -319,3 +319,7 @@ Main differences:
 - Named imports (`import Anthropic from "..."`)
 
 </details>
+
+---
+
+**Next:** [Exercise 2: Streaming Responses →](/10-ai-sdks/exercises/02-streaming-responses.md)

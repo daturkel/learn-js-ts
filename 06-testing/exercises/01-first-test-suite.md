@@ -227,3 +227,7 @@ describe("mergeWithEnv", () => {
 
 Run with `npm test` and you should see all tests passing.
 </details>
+
+---
+
+**Next:** [Exercise 2: Mocking APIs →](/06-testing/exercises/02-mocking-apis.md)

@@ -211,3 +211,7 @@ my-workspace/
 ```
 
 Using `pip install -e .` for each package (editable installs) is the Python equivalent of npm's workspace symlinks.
+
+---
+
+**Next:** [Module 05: Node & the Runtime →](/05-node-and-the-runtime/README.md)

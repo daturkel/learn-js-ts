@@ -227,3 +227,7 @@ curl -X POST http://localhost:3000/api/experiments \
   -d '{"name":""}' | jq
 ```
 </details>
+
+---
+
+**Next:** [Exercise 3: Middleware →](/08-web-servers-and-apis/exercises/03-middleware.md)

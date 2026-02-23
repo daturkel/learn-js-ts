@@ -2,7 +2,6 @@
 
 Testing in JavaScript/TypeScript with Vitest, compared to Python's pytest.
 
-**Prerequisites:** [Module 05](../05-node-and-the-runtime/README.md)
 **Time:** 1-2 sessions
 
 ## Vitest — The Modern Test Runner
@@ -258,4 +257,6 @@ export default defineConfig({
 1. [First Test Suite](./exercises/01-first-test-suite.md) — Test the config loader from Module 05
 2. [Mocking APIs](./exercises/02-mocking-apis.md) — Mock fetch and test API functions
 
-Next: [Module 07 — CLI Tools](../07-cli-tools/README.md)
+---
+
+**Next:** [Exercise 1: First Test Suite →](/06-testing/exercises/01-first-test-suite.md)

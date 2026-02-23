@@ -267,3 +267,7 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
 Then restart Claude Desktop. You'll see the tools available in the chat.
 
 </details>
+
+---
+
+**Next:** [Exercise 2: MCP with Tools →](/11-mcp-servers/exercises/02-mcp-with-tools.md)

@@ -2,7 +2,6 @@
 
 Understand the JS/TS toolchain: TypeScript configuration, bundling, and alternative runtimes.
 
-**Prerequisites:** [Module 04](../04-modules-and-packages/README.md), [Module 05](../05-node-and-the-runtime/README.md)
 **Time:** 1-2 sessions
 
 ## Why This Module?
@@ -271,4 +270,6 @@ This is similar to Python's `[project.scripts]` in `pyproject.toml` or Makefile 
 2. [Try Bun](./exercises/02-try-bun.md) — Run your existing projects with Bun
 3. [Bundle for Distribution](./exercises/03-bundle-for-distribution.md) — Bundle a CLI tool into a single file
 
-Next: [Module 13 — Capstone Project](../13-capstone-project/README.md)
+---
+
+**Next:** [Exercise 1: TSConfig Deep Dive →](/12-build-tools-and-runtimes/exercises/01-tsconfig-deep-dive.md)

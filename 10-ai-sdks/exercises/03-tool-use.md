@@ -486,3 +486,7 @@ while response.stop_reason == "tool_use":
 ```
 
 </details>
+
+---
+
+**Next:** [Exercise 4: Vercel AI SDK →](/10-ai-sdks/exercises/04-vercel-ai-sdk.md)

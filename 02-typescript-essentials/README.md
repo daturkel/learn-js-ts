@@ -937,4 +937,8 @@ npx tsx src/main.ts
 1. [Type Annotations](exercises/01-type-annotations.md) -- Add types to untyped JavaScript functions
 2. [Interfaces and Types](exercises/02-interfaces-and-types.md) -- Define types for an ML experiment tracker
 3. [Generics](exercises/03-generics.md) -- Implement generic utility types and functions
-4. [Type a Python Script](exercises/04-type-a-python-script.md) -- Rewrite a typed Python script in TypeScript
+4. [Type Narrowing](exercises/04-type-narrowing.md) -- Narrow unknown types and write type guards
+
+---
+
+**Next:** [Exercise 1: Type Annotations →](/02-typescript-essentials/exercises/01-type-annotations.md)

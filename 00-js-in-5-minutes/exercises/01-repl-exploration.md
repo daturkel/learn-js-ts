@@ -581,4 +581,6 @@ You've now seen the major syntax differences. The key takeaways:
 7. **Optional chaining** (`?.`) and **nullish coalescing** (`??`) are great
 8. **camelCase** everywhere, not snake_case
 
-Next: [Exercise 02: Python to JS Rosetta Stone](./02-python-to-js-rosetta.md)
+---
+
+**Next:** [Exercise 2: Python to JS Rosetta →](/00-js-in-5-minutes/exercises/02-python-to-js-rosetta.md)

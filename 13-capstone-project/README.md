@@ -2,7 +2,6 @@
 
 Apply everything you've learned by building a complete project.
 
-**Prerequisites:** All previous modules
 **Time:** 3-5 sessions
 
 ## Goal
@@ -81,3 +80,7 @@ There's no formal evaluation — this is self-paced learning. But here's what "g
 - **Copy patterns from exercises.** The exercises are reference implementations — reuse patterns you've practiced.
 - **Test early.** Writing tests alongside your code catches bugs before they compound.
 - **Use AI tools.** You're learning to be an AI engineer — use Claude, Cursor, etc. to help build your project. That's the whole point.
+
+---
+
+**Next:** [Project Ideas →](/13-capstone-project/project-ideas.md)

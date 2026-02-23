@@ -362,3 +362,7 @@ TuningPage (owns all state)
 Every component is a pure function of its props. State changes flow: user interaction → callback → setState → re-render → new props → children update.
 
 </details>
+
+---
+
+**Next:** [Exercise 3: Next.js App →](/09-react-and-nextjs/exercises/03-nextjs-app.md)

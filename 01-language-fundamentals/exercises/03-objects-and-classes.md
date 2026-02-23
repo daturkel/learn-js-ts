@@ -204,3 +204,7 @@ class Experiment {
 
 Note the `?.` optional chaining and `??` nullish coalescing — very handy for dealing with missing data.
 </details>
+
+---
+
+**Next:** [Exercise 4: Error Handling →](/01-language-fundamentals/exercises/04-error-handling.md)

@@ -202,3 +202,7 @@ Key differences:
 - CSV writing is manual string building (or use an npm package like `csv-stringify`)
 - Everything is `async` — every file operation needs `await`
 </details>
+
+---
+
+**Next:** [Exercise 2: Env Config →](/05-node-and-the-runtime/exercises/02-env-config.md)

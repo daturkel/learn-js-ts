@@ -267,3 +267,7 @@ mixedResults();
 
 Unlike `Promise.all`, `Promise.allSettled` never rejects. It waits for everything and tells you which succeeded and which failed.
 </details>
+
+---
+
+**Next:** [Exercise 2: Async/Await →](/03-async-patterns/exercises/02-async-await.md)

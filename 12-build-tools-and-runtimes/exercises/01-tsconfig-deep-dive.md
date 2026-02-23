@@ -248,3 +248,7 @@ ls dist/
 ```
 
 </details>
+
+---
+
+**Next:** [Exercise 2: Try Bun →](/12-build-tools-and-runtimes/exercises/02-try-bun.md)

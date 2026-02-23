@@ -326,3 +326,7 @@ The file structure directly maps to URLs. No router configuration file needed â€
 In Next.js, the file location IS the route definition.
 
 </details>
+
+---
+
+**Next:** [Exercise 4: Data Fetching â†’](/09-react-and-nextjs/exercises/04-data-fetching.md)

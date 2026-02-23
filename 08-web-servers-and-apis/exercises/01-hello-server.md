@@ -100,3 +100,7 @@ The structure is very similar. Main syntactic differences:
 - Hono: `c.req.query("key")` vs FastAPI: function params with `Query()`
 - Hono: `c.req.param("key")` vs FastAPI: function params matching `{path_param}`
 </details>
+
+---
+
+**Next:** [Exercise 2: REST API →](/08-web-servers-and-apis/exercises/02-rest-api.md)

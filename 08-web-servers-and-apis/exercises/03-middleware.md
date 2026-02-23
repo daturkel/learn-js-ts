@@ -134,3 +134,7 @@ curl -i -H "x-api-key: sk-test-12345" http://localhost:3000/api/error
 
 Check the response headers — you'll see `X-Request-Id` on every response, and the server logs will show timing.
 </details>
+
+---
+
+**Next:** [Module 09: React & Next.js →](/09-react-and-nextjs/README.md)

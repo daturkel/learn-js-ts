@@ -216,3 +216,7 @@ The Node version is longer because:
 - String padding uses `.padEnd()` / `.padStart()` instead of f-string formatting
 - `execSync` works like `subprocess.run()` with `capture_output=True`
 </details>
+
+---
+
+**Next:** [Module 06: Testing →](/06-testing/README.md)

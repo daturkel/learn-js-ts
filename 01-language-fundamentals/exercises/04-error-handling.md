@@ -281,3 +281,7 @@ function loadConfigAll(jsonString) {
 }
 ```
 </details>
+
+---
+
+**Next:** [Module 02: TypeScript Essentials →](/02-typescript-essentials/README.md)

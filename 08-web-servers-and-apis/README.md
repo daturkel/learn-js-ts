@@ -2,7 +2,6 @@
 
 Build HTTP servers and REST APIs with Hono, compared to Python's FastAPI.
 
-**Prerequisites:** [Module 06](../06-testing/README.md)
 **Time:** 2-3 sessions
 
 ## Hono — Like FastAPI for JavaScript
@@ -254,4 +253,6 @@ Hono advantages over Express: TypeScript-first, faster, modern API, works on edg
 2. [REST API](./exercises/02-rest-api.md) — CRUD API for experiments
 3. [Middleware](./exercises/03-middleware.md) — Custom middleware
 
-Next: [Module 09 — React and Next.js](../09-react-and-nextjs/README.md)
+---
+
+**Next:** [Exercise 1: Hello Server →](/08-web-servers-and-apis/exercises/01-hello-server.md)

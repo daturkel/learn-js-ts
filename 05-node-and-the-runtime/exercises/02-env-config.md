@@ -228,3 +228,7 @@ API_KEY=sk-test npx tsx config.ts        # Works — env var provides API_KEY
 API_KEY=sk-test PORT=9999 npx tsx config.ts  # Env var overrides .env and config.json
 ```
 </details>
+
+---
+
+**Next:** [Exercise 3: Child Processes →](/05-node-and-the-runtime/exercises/03-child-processes.md)

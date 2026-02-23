@@ -408,3 +408,7 @@ Browser request: GET /experiments
 The server fetches data and renders the initial HTML. The client component hydrates in the browser and handles interactivity. The data fetch never happens in the browser — it's done server-side before the page is sent.
 
 </details>
+
+---
+
+**Next:** [Module 10: AI SDKs →](/10-ai-sdks/README.md)

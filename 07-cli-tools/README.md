@@ -2,7 +2,6 @@
 
 Build command-line tools in TypeScript using Commander and Inquirer.
 
-**Prerequisites:** [Module 06](../06-testing/README.md)
 **Time:** 1-2 sessions
 
 ## Why Build CLIs in JS/TS?
@@ -213,4 +212,6 @@ This is like running `python script.py` — no build step needed.
 1. [Simple CLI](./exercises/01-simple-cli.md) — Build a file stats tool
 2. [Interactive CLI](./exercises/02-interactive-cli.md) — Build a project scaffolder
 
-Next: [Module 08 — Web Servers and APIs](../08-web-servers-and-apis/README.md)
+---
+
+**Next:** [Exercise 1: Simple CLI →](/07-cli-tools/exercises/01-simple-cli.md)

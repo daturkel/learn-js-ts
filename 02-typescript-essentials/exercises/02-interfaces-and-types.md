@@ -261,3 +261,7 @@ console.log("Summary:", summarizeExperiment(experiment));
 
 **Note:** TypeScript interfaces have no runtime presence — they're erased when compiled to JavaScript. There's nothing you can call or inspect at runtime. In Python, `TypedDict` and dataclasses do exist at runtime (you can iterate their fields, use them with Pydantic, etc.). This is one of the biggest conceptual differences between the two type systems.
 </details>
+
+---
+
+**Next:** [Exercise 3: Generics →](/02-typescript-essentials/exercises/03-generics.md)

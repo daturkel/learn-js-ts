@@ -2,7 +2,6 @@
 
 Build Model Context Protocol (MCP) servers that give AI models access to your tools and data.
 
-**Prerequisites:** [Module 10](../10-ai-sdks/README.md)
 **Time:** 1-2 sessions
 
 ## What is MCP?
@@ -213,4 +212,6 @@ The TypeScript version uses a more declarative API — you define tools with `se
 1. [Basic MCP Server](./exercises/01-basic-mcp-server.md) — Build a server with resources and tools
 2. [MCP with Tools](./exercises/02-mcp-with-tools.md) — Build an experiment tracker MCP server
 
-Next: [Module 12 — Build Tools and Runtimes](../12-build-tools-and-runtimes/README.md)
+---
+
+**Next:** [Exercise 1: Basic MCP Server →](/11-mcp-servers/exercises/01-basic-mcp-server.md)

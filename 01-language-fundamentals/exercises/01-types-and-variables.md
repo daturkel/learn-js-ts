@@ -307,3 +307,7 @@ console.log(a, b, c);
 - **12-15 correct:** You already think in JS. Move on quickly.
 - **8-11 correct:** Good instincts, just need to internalize the gotchas.
 - **Under 8:** Re-read the relevant sections of the [module README](../README.md), then try again.
+
+---
+
+**Next:** [Exercise 2: Functions and Array Methods →](/01-language-fundamentals/exercises/02-functions-and-closures.md)

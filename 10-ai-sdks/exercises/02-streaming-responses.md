@@ -303,3 +303,7 @@ await stream.finalMessage();
 ```
 
 </details>
+
+---
+
+**Next:** [Exercise 3: Tool Use →](/10-ai-sdks/exercises/03-tool-use.md)
