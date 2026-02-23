@@ -271,6 +271,22 @@ mixedResults();
 Unlike `Promise.all`, `Promise.allSettled` never rejects. It waits for everything and tells you which succeeded and which failed.
 </details>
 
+## Running everything in order
+
+If you call `pipeline()`, `parallelOps()`, and `mixedResults()` without `await`, they all start simultaneously and their output interleaves. To run them sequentially, wrap them in an async `main()` function:
+
+```typescript
+async function main() {
+  await pipeline();
+  await parallelOps();
+  await mixedResults();
+}
+
+main();
+```
+
+This pattern — a `main()` called once at the bottom of the file — is the standard way to sequence async work in Node.js. You'll see it constantly in real codebases.
+
 ---
 
 **Next:** [Exercise 2: Async/Await →](/03-async-patterns/exercises/02-async-await.md)
