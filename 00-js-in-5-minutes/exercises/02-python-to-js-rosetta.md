@@ -3,6 +3,10 @@
 
 Translate five small Python programs into JavaScript. This builds muscle memory for the syntax differences you explored in Exercise 01.
 
+## Setup
+
+Create `rosetta.js` and run with `node rosetta.js`. Write your JS translation for each snippet, verify the output matches the Python version, then move on to the next.
+
 ## Instructions
 
 - For each snippet, rewrite the Python code in JavaScript

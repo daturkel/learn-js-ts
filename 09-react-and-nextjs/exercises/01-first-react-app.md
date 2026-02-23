@@ -2,9 +2,18 @@
 
 Create a Next.js project and explore the file structure.
 
-## Steps
+## Setup
 
-### 1. Create the project
+Run the following to scaffold a Next.js project, then open it in your editor:
+
+```bash
+npx create-next-app@latest my-dashboard --typescript --app --tailwind --eslint --no-src-dir --import-alias "@/*"
+cd my-dashboard
+```
+
+## Tasks
+
+### Task 1: Explore the project structure
 
 ```bash
 npx create-next-app@latest my-dashboard --typescript --app --tailwind --eslint --no-src-dir --import-alias "@/*"

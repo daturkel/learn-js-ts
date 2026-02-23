@@ -2,6 +2,14 @@
 
 Initialize a TypeScript project from scratch and build a working module.
 
+## Setup
+
+Create a new directory for your package and work inside it:
+
+```bash
+mkdir stats-lib && cd stats-lib
+```
+
 ## Goal
 
 Set up a proper TypeScript project with `npm`, write a module with exports, and run it. This is the equivalent of setting up a Python project with `pyproject.toml`.

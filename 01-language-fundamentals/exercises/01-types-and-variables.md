@@ -2,6 +2,10 @@
 
 Predict the output of each snippet, then verify in the Node REPL (`node`).
 
+## Setup
+
+Open the Node REPL with `node` to run snippets interactively, or create `types.js` and run with `node types.js`.
+
 ## Instructions
 
 For each snippet:

@@ -2,6 +2,10 @@
 
 Test a function that calls an external API by mocking `fetch`.
 
+## Setup
+
+Continue in the same Vitest project from Exercise 1. Add a new file `src/api.ts` for the code under test and `src/api.test.ts` for the tests.
+
 ## Goal
 
 Practice mocking with `vi.fn()` and `vi.spyOn()` — the JS equivalents of Python's `unittest.mock`.

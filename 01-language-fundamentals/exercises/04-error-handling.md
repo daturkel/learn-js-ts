@@ -2,6 +2,10 @@
 
 Write a config parser that validates JSON input and returns typed results.
 
+## Setup
+
+Create `config-parser.js` and run with `node config-parser.js`.
+
 ## Goal
 
 Practice JavaScript's `try/catch` error handling by building a function that:

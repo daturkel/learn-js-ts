@@ -2,6 +2,10 @@
 
 Rewrite a Python data processing pipeline using JavaScript array methods.
 
+## Setup
+
+Create `functions.js` and run with `node functions.js`.
+
 ## The Python Version
 
 Here's a Python script that processes ML experiment results:
