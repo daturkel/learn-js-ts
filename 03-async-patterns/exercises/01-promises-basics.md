@@ -146,12 +146,12 @@ isn't undefined here" — safe because the callback only passes a value when `er
 
 ### Task 2: Chain with .then()
 
-Using your Promise-based functions, chain these operations:
+Using your Promise-based functions, chain these operations with `.then()` (not async/await yet):
 1. Read "config.json"
 2. Process the data (uppercase it)
 3. Send a notification with the result
-
-Do this using `.then()` chains (not async/await yet):
+4. Log "All done!" on success
+5. Catch any error and log it
 
 <details>
 <summary>Solution: .then() chain</summary>
