@@ -2,6 +2,10 @@
 
 Convert callback-based functions to Promises, then to async/await.
 
+## Setup
+
+Create `promises-basics.ts` and run with `npx tsx promises-basics.ts`.
+
 ## The Callback Functions
 
 Here are 5 functions that use the old callback pattern. Each simulates an async operation with `setTimeout`.
