@@ -34,10 +34,11 @@ Write a function `parseAge(value: unknown): number` that:
 - Throws a `TypeError` with a descriptive message otherwise
 
 ```typescript
-parseAge(25)       // 25
-parseAge("25")     // 25
-parseAge("hello")  // throws TypeError
-parseAge(null)     // throws TypeError
+console.log(parseAge(25));    // 25
+console.log(parseAge("25"));  // 25
+
+try { parseAge("hello"); } catch (e) { console.log((e as Error).message); }
+try { parseAge(null); }   catch (e) { console.log((e as Error).message); }
 ```
 
 <details>
@@ -64,10 +65,13 @@ function isString(value: unknown): value is string {
 
 When you call `isString(x)` in an `if`, TypeScript knows `x` is a `string` inside the block.
 
-Write these type guards:
+**When to use a type guard function vs. inline `typeof`:** For primitives (`string`, `number`, `boolean`), inline `typeof` checks are fine — they're short and TypeScript narrows them automatically. Type guard functions are worth writing when the check is complex enough to reuse: multi-condition checks like `isRecord`, checks involving `in` or `instanceof`, or anywhere you'd otherwise repeat the same narrowing logic in multiple places.
+
+**Caveat:** TypeScript does not verify that your type guard's body actually matches its declared return type. If you write `return true` in `isString`, TypeScript will still narrow the type to `string` — and your program will have a silent bug. The `value is T` annotation is a promise to the compiler, not something it checks.
+
+`isString` above is already complete — use it as a model to write the remaining three:
 
 ```typescript
-function isString(value: unknown): value is string
 function isNumber(value: unknown): value is number
 function isRecord(value: unknown): value is Record<string, unknown>
 function hasKey<K extends string>(obj: Record<string, unknown>, key: K): obj is Record<K, unknown>
@@ -85,16 +89,14 @@ if (isRecord(data) && hasKey(data, "model") && isString(data.model)) {
 <details>
 <summary>Hint: hasKey</summary>
 
+The body is a one-liner — JavaScript's `in` operator checks if a key exists on an object:
+
 ```typescript
-function hasKey<K extends string>(
-  obj: Record<string, unknown>,
-  key: K
-): obj is Record<K, unknown> {
-  return key in obj;
-}
+"model" in { model: "bert" }  // true
+"foo"   in { model: "bert" }  // false
 ```
 
-The `K extends string` constraint means the key must be a string literal type, so TypeScript can track the specific key name.
+The `K extends string` constraint lets TypeScript track the specific key name (e.g. `"model"`) rather than just `string`, so after the guard, `obj` is typed as `Record<"model", unknown>`.
 </details>
 
 ### Task 3: Parse an API response
@@ -147,9 +149,9 @@ if (!bad.ok) {
   console.log(bad.error, bad.retryAfter);  // TypeScript knows these exist
 }
 
-parseApiResponse({ ok: true });             // throws — missing fields
-parseApiResponse("not an object");          // throws
-parseApiResponse({ ok: "yes" });            // throws — ok must be boolean
+try { parseApiResponse({ ok: true }); } catch (e) { console.log((e as Error).message); }
+try { parseApiResponse("not an object"); } catch (e) { console.log((e as Error).message); }
+try { parseApiResponse({ ok: "yes" }); } catch (e) { console.log((e as Error).message); }
 ```
 
 <details>
@@ -175,13 +177,13 @@ function parseApiResponse(raw: unknown): ApiResponse {
 Write `describeResponse(response: ApiResponse): string` that returns a human-readable summary. TypeScript should narrow the type automatically based on `response.ok` — no casts needed.
 
 ```typescript
-describeResponse({ ok: true, model: "claude-3", content: "Hi!", tokens: 42 })
+console.log(describeResponse({ ok: true, model: "claude-3", content: "Hi!", tokens: 42 }));
 // "claude-3 responded with 42 tokens: Hi!"
 
-describeResponse({ ok: false, error: "rate_limit_exceeded", retryAfter: 30 })
+console.log(describeResponse({ ok: false, error: "rate_limit_exceeded", retryAfter: 30 }));
 // "Request failed: rate_limit_exceeded (retry after 30s)"
 
-describeResponse({ ok: false, error: "invalid_key" })
+console.log(describeResponse({ ok: false, error: "invalid_key" }));
 // "Request failed: invalid_key"
 ```
 
@@ -303,4 +305,6 @@ console.log(describeResponse({ ok: false, error: "invalid_key" }));
 - Type guards (`value is T`) teach TypeScript what you've verified so it can narrow downstream.
 - Discriminated unions (`ok: true` / `ok: false`) let TypeScript narrow automatically in `if/else` — no casts, no runtime checks beyond the initial parse.
 - This pattern (`parse at the boundary, use typed values everywhere inside`) is the standard approach for handling external data in TypeScript.
+
+**In practice:** Most TypeScript codebases use a validation library rather than writing this manually. [Zod](https://zod.dev) is the standard choice — you define a schema once and get both runtime validation and TypeScript types derived from it automatically. The manual approach here is worth understanding (it's what libraries like Zod do internally, and it appears in zero-dependency code), but in application code you'd reach for Zod instead. It's covered in Module 08.
 </details>
