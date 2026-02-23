@@ -202,7 +202,7 @@ console.log(`\nFetch with retry: ${user.name}`);
 ### Key takeaways
 - `fetch` does NOT throw on 4xx/5xx — you must check `response.ok` or `response.status`
 - `response.json()` returns a Promise — it must be awaited separately from `fetch`
-- `as Promise<User>` is a type assertion: `fetch` returns `any`, so you tell TS what to expect
+- `as Promise<User>` is a type assertion — TypeScript trusts you, but there's no runtime check. If the API returns an unexpected shape, your code will compile and silently break. Use Zod (Module 08) for safe runtime validation at external boundaries.
 - `Promise.all` with `.map()` is the standard pattern for launching parallel async operations
 - Retry logic should distinguish transient server errors (5xx) from permanent client errors (4xx)
 </details>
