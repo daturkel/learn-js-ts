@@ -48,12 +48,7 @@ console.log(`${user.name} — ${user.email}`);
 
 Fetch users 1 through 5 concurrently using `Promise.all`. Print each user's name.
 
-Test it:
-
-```typescript
-const users = await Promise.all([1, 2, 3, 4, 5].map(fetchUser));
-users.forEach(u => console.log(u.name));
-```
+Once implemented, print each user's name — you should see 5 names logged in order.
 
 ### Task 3: Error handling
 
